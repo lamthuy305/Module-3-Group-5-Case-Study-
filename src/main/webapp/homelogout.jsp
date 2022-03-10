@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -57,11 +58,7 @@
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
-<<<<<<< HEAD
-                            <h2>Xin chào ${username}!</h2>
-=======
-                            <h2>Xin chào </h2>
->>>>>>> devtinh
+                            <h3>Xin chào ${username}!</h3>
                             <a href="/login"><i class="fa fa-user"></i>Logout</a>
                         </div>
                     </div>

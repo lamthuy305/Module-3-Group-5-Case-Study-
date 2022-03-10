@@ -38,15 +38,18 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                        <div class="header__top__right__social">
-                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-                        </div>
+                            <div class="header__top__right__social">
+                                <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                            </div>
                         <div class="header__top__right__language">
                             <img src="img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
                             <a href="/login"><i class="fa fa-user"></i>Login</a>
+                        </div>
+                        <div class="header__top__right__auth">
+                            <a href="/register">/Register</a>
                         </div>
                     </div>
                 </div>
