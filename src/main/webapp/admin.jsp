@@ -211,7 +211,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/category" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý danh mục
@@ -219,7 +219,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/image" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý ảnh sản phẩm
@@ -227,7 +227,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/users" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý người dùng
@@ -235,7 +235,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/orders" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý đơn đặt hàng

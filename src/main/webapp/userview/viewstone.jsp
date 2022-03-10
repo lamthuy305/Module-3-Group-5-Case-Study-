@@ -49,7 +49,7 @@
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
-                            <a href="#"><i class="fa fa-user"></i> Login</a>
+                            <a href="/login"><i class="fa fa-user"></i> Login</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="./shop-grid.html">Shop</a></li>
+                        <li><a href="/orders?action=create">Shop</a></li>
                         <li><a href="#">Pages</a>
 
                         </li>
