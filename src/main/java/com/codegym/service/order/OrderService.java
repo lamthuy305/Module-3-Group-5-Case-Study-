@@ -37,4 +37,9 @@ public class OrderService implements IOrderService {
         return orderDao.deleteById(id);
     }
 
+    @Override
+    public List<Order> showOrderDetailById(int id){
+        return orderDao.showOrderDetailById(id);
+    }
+
 }

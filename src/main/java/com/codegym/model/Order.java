@@ -3,25 +3,19 @@ package com.codegym.model;
 public class Order {
     private int id;
     private int user_id;
-    private int stone_id;
-    private int quantity;
     private String date;
 
     public Order() {
     }
 
-    public Order(int user_id, int stone_id, int quantity, String date) {
+    public Order(int user_id, String date) {
         this.user_id = user_id;
-        this.stone_id = stone_id;
-        this.quantity = quantity;
         this.date = date;
     }
 
-    public Order(int id, int user_id, int stone_id, int quantity, String date) {
+    public Order(int id, int user_id, String date) {
         this.id = id;
         this.user_id = user_id;
-        this.stone_id = stone_id;
-        this.quantity = quantity;
         this.date = date;
     }
 
@@ -41,22 +35,6 @@ public class Order {
         this.user_id = user_id;
     }
 
-    public int getStone_id() {
-        return stone_id;
-    }
-
-    public void setStone_id(int stone_id) {
-        this.stone_id = stone_id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String getDate() {
         return date;
     }
@@ -65,4 +43,3 @@ public class Order {
         this.date = date;
     }
 }
-

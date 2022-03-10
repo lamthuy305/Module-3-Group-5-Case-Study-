@@ -2,6 +2,9 @@ package com.codegym.dao.order;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Order;
+import com.codegym.model.OrderDetail;
+import com.codegym.model.Stone;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,8 +12,8 @@ import java.util.List;
 
 public class OrderDao implements IOrderDao {
     public static final String DELETE_ORDER = "delete from orders where id = ?";
-    public static final String UPDATE_ORDER = "UPDATE orders SET date =? WHERE id=?";
-    public static final String INSERT_ORDER = "INSERT INTO orders (user_id,stone_id,quantity, date) VALUES (?,?,?,?);";
+    public static final String UPDATE_ORDER = "UPDATE orders SET user_id = ?, date =? WHERE id=?";
+    public static final String INSERT_ORDER = "INSERT INTO orders (user_id, date) VALUES (?,?);";
     public static final String SELECT_ONE_ORDER = "SELECT * FROM orders WHERE id = ?;";
     public static final String SELECT_ALL_ORDERS = "SELECT * FROM orders; ";
     private Connection connection = DBConnection.getConnection();
@@ -28,10 +31,8 @@ public class OrderDao implements IOrderDao {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 int user_id = resultSet.getInt("user_id");
-                int stone_id = resultSet.getInt("stone_id");
-                int quantity = resultSet.getInt("quantity");
                 String date = resultSet.getString("date");
-                Order order = new Order(id, user_id, stone_id, quantity, date);
+                Order order = new Order(id, user_id, date);
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -49,10 +50,8 @@ public class OrderDao implements IOrderDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int user_id = resultSet.getInt("user_id");
-                int stone_id = resultSet.getInt("stone_id");
-                int quantity = resultSet.getInt("quantity");
                 String date = resultSet.getString("date");
-                order = new Order(id, user_id, stone_id, quantity, date);
+                order = new Order(id, user_id, date);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,9 +64,7 @@ public class OrderDao implements IOrderDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ORDER);
             preparedStatement.setInt(1, order.getUser_id());
-            preparedStatement.setInt(2, order.getStone_id());
-            preparedStatement.setInt(3, order.getQuantity());
-            preparedStatement.setString(4, order.getDate());
+            preparedStatement.setString(2, order.getDate());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,32 +89,29 @@ public class OrderDao implements IOrderDao {
     public boolean deleteById(int id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ORDER);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
-//    @Override
-//    public boolean showPrice() {
-//        List<Order> orders = new ArrayList<>();
-//        try {
-//            PreparedStatement preparedStatement = connection.prepareStatement("call getOrderPrice()");
-//            ResultSet rs = preparedStatement.executeQuery();
-//            while (rs.next()){
-//                int id = rs.getInt("id");
-//                int user_id = rs.getInt("user_id");
-//                int stone_id = rs.getInt("stone_id");
-//                int quantity = rs.getInt("quantity");
-//                String date = rs.getString("date");
-//                double orderPrice = rs.getDouble("order_price");
-//                Order order = new Order(id,user_id,stone_id,quantity,date,orderPrice)
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return orders;
-//    }
+@Override
+    public List<Order> showOrderDetailById(int id) {
+        List<Order> orderDetails = new ArrayList<>();
+        try {
+            CallableStatement callableStatement = connection.prepareCall("call getOrderPrice(?)");
+            callableStatement.setInt(1,id);
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()){
+               int quantity = resultSet.getInt("quantity");
+               double orderPrice = resultSet.getDouble(("(od.quantity*s.price"));// ???
+               OrderDetail orderDetail = new OrderDetail(quantity,orderPrice);
+               orderDetails.add(orderDetail);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orderDetails;
+    }
 }
