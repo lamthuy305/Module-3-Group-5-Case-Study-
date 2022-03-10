@@ -220,7 +220,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/category" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý danh mục
@@ -228,7 +228,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/image" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý ảnh sản phẩm
@@ -236,7 +236,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/users" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý người dùng
@@ -244,7 +244,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/products" class="nav-link">
+                        <a href="/orders" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
                                 Quản lý đơn đặt hàng
@@ -265,7 +265,7 @@
         <section class="content">
             <div class="container-fluid">
 
-                <h1 style="text-align: center ">Stone List</h1>
+                <h1 style="text-align: center ">List Stone</h1>
                 <a href="/stones?action=create" class="btn btn-primary"><b>Add Stone</b></a>
                 <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
 
@@ -285,7 +285,7 @@
                     <tbody>
                     <c:forEach var="stone" varStatus="loop" items="${stones}">
                         <tr>
-                            <td>${stone.id}</td>
+                            <td>${loop.count}</td>
                             <td>${stone.name}</td>
                             <td>${stone.price}</td>
                             <td>${stone.description}</td>
