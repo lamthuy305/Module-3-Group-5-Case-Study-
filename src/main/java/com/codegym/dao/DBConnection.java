@@ -8,7 +8,10 @@ public class DBConnection {
     public static final String JDBC_URL = "jdbc:mysql://localhost:3306/stone_management";
     public static final String JDBC_USERNAME = "root";
     public static final String JDBC_PASSWORD = "123456";
+<<<<<<< HEAD
 
+=======
+>>>>>>> devcuong
 
     public static Connection getConnection() {
         Connection connection = null;
