@@ -42,28 +42,21 @@ public class OrderServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
-//            case "edit": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Stone stone = stoneService.findById(id);
-//                int category_id = stone.getCategory_id();
-//                Category category = categoryService.findById(category_id);
-//                List<Category> categories = categoryService.findAll();
-//                request.setAttribute("stone", stone);
-//                request.setAttribute("category", category);
-//                request.setAttribute("categories", categories);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/edit.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
-//            case "showorderdetail": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Order_detail order_detail = orderService.showOrderDetail(id);
-//                request.setAttribute("order_detail", order_detail);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/showorderdetail.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
+            case "edit": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Order order = orderService.findById(id);
+                request.setAttribute("order", order);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/edit.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
+            case "delete": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Order order = orderService.findById(id);
+                request.setAttribute("order", order);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/delete.jsp");
+                dispatcher.forward(request, response);
+            }
             case "create": {
                 List<Stone> stones = stoneService.findAll();
                 request.setAttribute("stones", stones);
@@ -71,16 +64,14 @@ public class OrderServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-//            case "view": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                List<Image> images = imageService.findAllByStone_ID(id);
-//                Stone stone = stoneService.findById(id);
-//                request.setAttribute("images", images);
-//                request.setAttribute("stone", stone);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/view.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
+            case "view": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Order order = orderService.findById(id);
+                request.setAttribute("order", order);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/view.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
             default: {
                 List<Order> orders = orderService.findAll();
                 request.setAttribute("orders", orders);
@@ -105,29 +96,28 @@ public class OrderServlet extends HttpServlet {
                 int stone_id = Integer.parseInt(request.getParameter("stone_id"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String date = request.getParameter("date");
-                Order order = new Order(user_id,stone_id,quantity,date);
+                Order order = new Order(user_id, stone_id, quantity, date);
                 orderService.create(order);
                 response.sendRedirect("/orders");
                 break;
             }
-//            case "delete": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                stoneService.deleteById(id);
-//                response.sendRedirect("/stones");
-//                break;
-//            }
-//            case "edit": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                String name = request.getParameter("name");
-//                double price = Double.parseDouble(request.getParameter("price"));
-//                String description = request.getParameter("description");
-//                String image = request.getParameter("image");
-//                int category_id = Integer.parseInt(request.getParameter("category_id"));
-//                Stone stone = new Stone(name, price, description, image, category_id);
-//                stoneService.updateById(id, stone);
-//                response.sendRedirect("/stones");
-//                break;
-//            }
+            case "delete": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                orderService.deleteById(id);
+                response.sendRedirect("/orders");
+                break;
+            }
+            case "edit": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                int user_id = Integer.parseInt(request.getParameter("user_id"));
+                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                String date = request.getParameter("date");
+                Order order = new Order(user_id, stone_id, quantity, date);
+                orderService.updateById(id, order);
+                response.sendRedirect("/orders");
+                break;
+            }
         }
     }
 }
