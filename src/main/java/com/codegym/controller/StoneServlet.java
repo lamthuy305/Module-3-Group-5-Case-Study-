@@ -79,6 +79,10 @@ public class StoneServlet extends HttpServlet {
             }
             default: {
                 List<Stone> stones = stoneService.findAll();
+                String q = request.getParameter("q");
+                if (q != null) {
+                    stones = stoneService.findAllByName(q);
+                }
                 request.setAttribute("stones", stones);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/list.jsp");
                 dispatcher.forward(request, response);

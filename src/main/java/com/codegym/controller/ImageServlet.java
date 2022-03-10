@@ -5,6 +5,7 @@ import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.model.Category;
 import com.codegym.model.Image;
+import com.codegym.model.Image_Stone;
 import com.codegym.model.Stone;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
@@ -76,8 +77,12 @@ public class ImageServlet extends HttpServlet {
                 break;
             }
             default: {
-                List<Image> images = imageService.findAll();
-                request.setAttribute("images", images);
+                List<Image_Stone> image_stones = imageService.findAllByStoneName();
+                String q = request.getParameter("q");
+                if (q != null) {
+                    image_stones = imageService.findByStoneName(q);
+                }
+                request.setAttribute("image_stones", image_stones);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/image/list.jsp");
                 dispatcher.forward(request, response);
                 break;

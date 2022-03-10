@@ -70,6 +70,10 @@ public class CategoryServlet extends HttpServlet {
             }
             default: {
                 List<Category> categories = categoryService.findAll();
+                String q = request.getParameter("q");
+                if (q != null) {
+                    categories = categoryService.findAllByName(q);
+                }
                 request.setAttribute("categories", categories);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/category/list.jsp");
                 dispatcher.forward(request, response);

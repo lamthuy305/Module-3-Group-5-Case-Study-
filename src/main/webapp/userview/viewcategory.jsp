@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>VicoStone | Category</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
@@ -68,7 +68,8 @@
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
                         <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="#">Bao hanh</a>
+                        <li><a href="#">CSKH</a>
 
                         </li>
 
