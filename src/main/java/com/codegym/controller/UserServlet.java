@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.dao.user.UserDao;
+import com.codegym.model.Role;
 import com.codegym.model.User;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.user.UserService;
