@@ -12,6 +12,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
@@ -20,6 +21,16 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+=======
+    <link rel="stylesheet" href="/file/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/file/css/style.css" type="text/css">
+>>>>>>> devtinh
 </head>
 
 <body>
@@ -46,7 +57,11 @@
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
+<<<<<<< HEAD
                             <h2>Xin chào ${username}!</h2>
+=======
+                            <h2>Xin chào </h2>
+>>>>>>> devtinh
                             <a href="/login"><i class="fa fa-user"></i>Logout</a>
                         </div>
                     </div>
@@ -235,6 +250,7 @@
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
+<<<<<<< HEAD
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.nice-select.min.js"></script>
@@ -243,6 +259,16 @@
 <script src="js/mixitup.min.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="js/main.js"></script>
+=======
+<script src="/file/js/jquery-3.3.1.min.js"></script>
+<script src="/file/js/bootstrap.min.js"></script>
+<script src="/file/js/jquery.nice-select.min.js"></script>
+<script src="/file/js/jquery-ui.min.js"></script>
+<script src="/file/js/jquery.slicknav.js"></script>
+<script src="/file/js/mixitup.min.js"></script>
+<script src="/file/js/owl.carousel.min.js"></script>
+<script src="/file/js/main.js"></script>
+>>>>>>> devtinh
 
 
 </body>
