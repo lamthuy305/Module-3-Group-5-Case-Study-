@@ -19,7 +19,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public Order findById(int id) {
-        return null;
+        return orderDao.findById(id);
     }
 
     @Override
@@ -29,12 +29,12 @@ public class OrderService implements IOrderService {
 
     @Override
     public boolean updateById(int id, Order order) {
-        return false;
+        return orderDao.updateById(id, order);
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return orderDao.deleteById(id);
     }
 
 }
