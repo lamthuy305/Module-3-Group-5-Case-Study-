@@ -20,14 +20,8 @@
     <h1>Add Order</h1>
     <form action="/orders?action=create" method="post">
         <div class="mb-3">
-            <label for="user_id" class="form-label">User ID</label>
-            <select class="form-control" name="user_id" id="user_id">
-                <%--                <c:forEach var="category" items="${categories}">--%>
-                <option value="4">4</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <%--                </c:forEach>--%>
-            </select>
+            <label for="id" class="form-label">User ID</label>
+            <input type="text" class="form-control" id="id" name="id" value="${user.id}" disabled>
         </div>
         <div class="mb-3">
             <label for="stone_id" class="form-label">Stone ID</label>

@@ -19,9 +19,9 @@
             <th scope="col">Order Detail Id</th>
             <th scope="col">Stone Type</th>
             <th scope="col">Quantity</th>
-            <th scope="col">Stone Price</th>
-            <th scope="col">Create Date</th>
             <th scope="col">Price</th>
+            <th scope="col">Create Date</th>
+            <th scope="col">Total</th>
         </tr>
         </thead>
         <tbody>

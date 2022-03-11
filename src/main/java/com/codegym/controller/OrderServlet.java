@@ -65,10 +65,23 @@ public class OrderServlet extends HttpServlet {
             }
             case "create": {
                 List<Stone> stones = stoneService.findAll();
-                request.setAttribute("stones", stones);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
-                dispatcher.forward(request, response);
-                break;
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                if (user != null) {
+                    session.setAttribute("user", user);
+                    request.setAttribute("user", user);
+                    request.setAttribute("stones", stones);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                } else {
+                    String msg = "Please sign in before shopping";
+                    request.setAttribute("msg", msg);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                }
+
             }
             case "view": {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -80,7 +93,13 @@ public class OrderServlet extends HttpServlet {
             }
 
             default: {
-                List<Order> orders = orderService.findAll();
+                List<Order> orders;
+                String q = request.getParameter("q");
+                if (q != null) {
+                    orders = orderService.findOrderByOrderID(q);
+                } else {
+                    orders = orderService.findAll();
+                }
                 request.setAttribute("orders", orders);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/order/list.jsp");
                 dispatcher.forward(request, response);
@@ -116,7 +135,7 @@ public class OrderServlet extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 int user_id = Integer.parseInt(request.getParameter("user_id"));
                 String date = request.getParameter("date");
-                Order order = new Order(id,user_id, date);
+                Order order = new Order(id, user_id, date);
                 orderService.updateById(id, order);
                 response.sendRedirect("/orders");
                 break;

@@ -5,7 +5,6 @@ import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.order.OrderDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
-import com.codegym.model.Role;
 import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
@@ -23,10 +22,10 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users")
+
 public class UserServlet extends HttpServlet {
     private IStoneService stoneService;
     private ICategoryService categoryService;
@@ -102,7 +101,13 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showListUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<User> users = userService.findAll();
+        List<User> users;
+        String q = request.getParameter("q");
+        if (q != null) {
+            users = userService.findUserByUserName(q);
+        } else {
+            users = userService.findAll();
+        }
         request.setAttribute("users", users);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/user/list.jsp");
         dispatcher.forward(request, response);
@@ -127,7 +132,7 @@ public class UserServlet extends HttpServlet {
                 deleteUser(request, response);
                 break;
             }
-            case "showGuest":{
+            case "showGuest": {
 
             }
         }
@@ -147,7 +152,7 @@ public class UserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         int role_id = Integer.parseInt(request.getParameter("role_id"));
-        User user = new User(id,name, password, birthday, address, email,role_id);
+        User user = new User(id, name, password, birthday, address, email, role_id);
         userService.updateById(id, user);
         response.sendRedirect("/users");
     }

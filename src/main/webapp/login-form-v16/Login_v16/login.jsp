@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
@@ -9,9 +9,11 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="login-form-v16/Login_v16/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="login-form-v16/Login_v16/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/vendor/animate/animate.css">
     <!--===============================================================================================-->
@@ -36,7 +38,10 @@
 					Account Login
 				</span>
             <form method="post" action="/login?action=login" class="login100-form validate-form p-b-33 p-t-5">
-
+                <div style="height: 20px;"></div>
+                <c:if test="${msg != null}">
+                    <h6 style="color: red; text-align: center">${msg}</h6>
+                </c:if>
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
                     <input class="input100" type="text" name="username" placeholder="User name">
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>

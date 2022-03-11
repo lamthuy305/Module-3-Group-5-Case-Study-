@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -40,19 +40,29 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-                            </div>
+                        <div class="header__top__right__social">
+                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                        </div>
                         <div class="header__top__right__language">
                             <img src="img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
-                        <div class="header__top__right__auth">
-                            <a href="/login"><i class="fa fa-user"></i>Login</a>
-                        </div>
-                        <div class="header__top__right__auth">
-                            <a href="/register">/Register</a>
-                        </div>
+                        <c:if test="${user == null}">
+                            <div class="header__top__right__auth">
+                                <a href="/login"><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="/register">/Register</a>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${user != null}">
+                            <div class="header__top__right__auth">
+                                <p>Hello: ${user.username}!</p>
+                                <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+                            </div>
+                        </c:if>
+
                     </div>
                 </div>
             </div>

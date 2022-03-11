@@ -8,6 +8,7 @@ import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
 import com.codegym.model.Image;
 import com.codegym.model.Stone;
+import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 import com.codegym.service.image.IImageService;
@@ -55,8 +56,22 @@ public class UserViewServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "logout": {
+                User user = null;
+                HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
+                request.setAttribute("categories", categories);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
+                break;
+            }
 
             case "viewcategory": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
                 int id = Integer.parseInt(request.getParameter("id"));
                 List<Stone> stones = stoneService.findAllByCategory(id);
                 request.setAttribute("stones", stones);
@@ -67,6 +82,10 @@ public class UserViewServlet extends HttpServlet {
             }
 
             case "viewstone": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
                 int id = Integer.parseInt(request.getParameter("id"));
                 Stone stone = stoneService.findById(id);
                 List<Image> images = imageService.findAllByStone_ID(id);
@@ -78,6 +97,10 @@ public class UserViewServlet extends HttpServlet {
                 break;
             }
             case "seachstone": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
                 String q = request.getParameter("q");
                 List<Stone> stones = stoneService.findAllByName(q);
                 request.setAttribute("stones", stones);
@@ -88,9 +111,10 @@ public class UserViewServlet extends HttpServlet {
             }
 
             default: {
-//                HttpSession session = request.getSession();
-//                session.setAttribute("user", user);
-//                request.setAttribute("user", user);
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
                 request.setAttribute("categories", categories);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);

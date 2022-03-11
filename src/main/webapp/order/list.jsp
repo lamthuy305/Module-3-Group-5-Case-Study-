@@ -192,10 +192,10 @@
 
             <!-- SidebarSearch Form -->
             <div class="form-inline">
-                <form action="/stones">
+                <form action="orders">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                               aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search by ID Order"
+                               aria-label="Search" name="q">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -266,9 +266,9 @@
             <div class="container-fluid">
 
                 <h1 style="text-align: center ">List Order</h1>
-                <a href="/orders?action=create" class="btn btn-primary"><b>Add Order</b></a>
-                <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
-
+                <div class="col-12" style="text-align: right ; margin-bottom: 20px">
+                    <a class="btn btn-primary float-end" href="/orders?action=create">Tạo mới</a>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
