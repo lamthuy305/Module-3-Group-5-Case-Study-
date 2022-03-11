@@ -2,6 +2,7 @@ package com.codegym.service.category;
 
 import com.codegym.dao.category.ICategoryDao;
 import com.codegym.model.Category;
+import com.codegym.model.Stone;
 
 import java.util.List;
 
@@ -35,5 +36,11 @@ public class CategoryService implements ICategoryService {
     @Override
     public boolean deleteById(int id) {
         return categoryDao.deleteCategoryUsingProcedure(id);
+    }
+
+    @Override
+    public List<Category> findAllByName(String q) {
+        q = "%" + q + "%";
+        return categoryDao.findAllByName(q);
     }
 }

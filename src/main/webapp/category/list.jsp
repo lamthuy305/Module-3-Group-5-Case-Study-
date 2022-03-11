@@ -54,9 +54,9 @@
                     <i class="fas fa-search"></i>
                 </a>
                 <div class="navbar-search-block">
-                    <form class="form-inline">
+                    <form action="/category">
                         <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search by Name" name="q"
                                    aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
@@ -192,9 +192,9 @@
 
             <!-- SidebarSearch Form -->
             <div class="form-inline">
-                <form action="/stones">
+                <form action="/category">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search by Name" name="q"
                                aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">

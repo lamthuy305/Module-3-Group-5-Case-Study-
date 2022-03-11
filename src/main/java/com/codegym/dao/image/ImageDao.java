@@ -2,6 +2,7 @@ package com.codegym.dao.image;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Image;
+import com.codegym.model.Image_Stone;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,6 +32,47 @@ public class ImageDao implements IImageDao {
             e.printStackTrace();
         }
         return images;
+    }
+
+    public List<Image_Stone> findAllByStoneName() {
+        List<Image_Stone> image_stones = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT i.id,i.link,i.stone_id,s.name FROM image i join stones s on i.stone_id = s.id;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String link = resultSet.getString("link");
+                int stone_id = resultSet.getInt("stone_id");
+                String stone_name = resultSet.getString("name");
+                Image image = new Image(id, link, stone_id);
+                Image_Stone image_stone = new Image_Stone(image, stone_name);
+                image_stones.add(image_stone);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return image_stones;
+    }
+
+    public List<Image_Stone> findByStoneName(String q) {
+        List<Image_Stone> image_stones = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT i.id,i.link,i.stone_id,s.name FROM image i join stones s on i.stone_id = s.id WHERE s.name like ?;");
+            preparedStatement.setString(1, q);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String link = resultSet.getString("link");
+                int stone_id = resultSet.getInt("stone_id");
+                String stone_name = resultSet.getString("name");
+                Image image = new Image(id, link, stone_id);
+                Image_Stone image_stone = new Image_Stone(image, stone_name);
+                image_stones.add(image_stone);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return image_stones;
     }
 
     @Override

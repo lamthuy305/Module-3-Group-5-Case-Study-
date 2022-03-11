@@ -3,6 +3,7 @@ package com.codegym.service.image;
 
 import com.codegym.dao.image.IImageDao;
 import com.codegym.model.Image;
+import com.codegym.model.Image_Stone;
 
 import java.util.List;
 
@@ -16,6 +17,15 @@ public class ImageService implements IImageService {
     @Override
     public List<Image> findAll() {
         return imageDao.findAll();
+    }
+
+    public List<Image_Stone> findAllByStoneName() {
+        return imageDao.findAllByStoneName();
+    }
+
+    public List<Image_Stone> findByStoneName(String q) {
+        q = "%" + q + "%";
+        return imageDao.findByStoneName(q);
     }
 
     @Override

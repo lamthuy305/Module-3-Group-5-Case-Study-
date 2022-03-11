@@ -15,6 +15,7 @@ public class UserDao implements IUserDao {
     public static final String UPDATE_USER = "UPDATE users SET username = ?, password = ?, birthday = ?, address = ?, email=?,role_id =? where  id = ?";
     public static final String DELETE_USER = "delete from users where id = ?";
     public static final String SELECT_ALL_GUEST_FROM_USERS = "select * from users where role_id = 2";
+    public static final String FIND_USERNAME_PASSWORD = "SELECT * from users where username= ? and password= ?";
     Connection connection = DBConnection.getConnection();
 
     @Override
@@ -129,6 +130,38 @@ public class UserDao implements IUserDao {
             e.printStackTrace();
         }
         return guest;
+    }
+
+//    public boolean checkLogin(String username, String password) {
+//        boolean isUser = false;
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement(FIND_USERNAME_PASSWORD);
+//            preparedStatement.setString(1, username);
+//            preparedStatement.setString(2, password);
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            if (resultSet.next()) {
+//                isUser = true;
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return isUser;
+//    }
+
+    public int findRoleId(String username, String password) {
+        int role_id = -1;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("select role_id from users where username= ? and password= ?");
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                role_id = resultSet.getInt("role_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return role_id;
     }
 }
 

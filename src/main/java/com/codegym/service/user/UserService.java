@@ -41,4 +41,14 @@ public class UserService implements IUserService{
     public List<User> getAllGuestUser() {
         return userDao.getAllGuestUser();
     }
+//
+//    @Override
+//    public boolean checkLogin(String username, String password) {
+//        return userDao.checkLogin(username,password);
+//    }
+
+    @Override
+    public int findRoleId(String username, String password) {
+        return userDao.findRoleId(username,password);
+    }
 }

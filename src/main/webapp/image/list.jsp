@@ -54,9 +54,10 @@
                     <i class="fas fa-search"></i>
                 </a>
                 <div class="navbar-search-block">
-                    <form class="form-inline">
+                    <form action="/image">
                         <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                            <input class="form-control form-control-navbar" type="search"
+                                   placeholder="Search by stone_id" name="q"
                                    aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
@@ -192,10 +193,10 @@
 
             <!-- SidebarSearch Form -->
             <div class="form-inline">
-                <form action="/stones">
+                <form action="/image ">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" type="search" placeholder="Search"
-                               aria-label="Search">
+                        <input class="form-control form-control-sidebar" type="search" placeholder="Search by Name"
+                               name="q" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
                                 <i class="fas fa-search fa-fw"></i>
@@ -265,33 +266,38 @@
         <section class="content">
             <div class="container-fluid">
 
-                <h1 style="text-align: center ">List Category</h1>
+                <h1 style="text-align: center ">List Image</h1>
                 <a href="/image?action=create" class="btn btn-primary"><b>Add Image</b></a>
                 <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
 
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col" style="width: 20%">#</th>
-                        <th scope="col" style="width: 20%">Stone ID</th>
-                        <th scope="col" style="width: 40%">Image</th>
-                        <th scope="col" style="width: 10%"></th>
-                        <th scope="col" style="width: 10%"></th>
+                        <th scope="col">#</th>
+                        <th scope="col">Stone ID</th>
+                        <th scope="col">Stone Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="image" varStatus="loop" items="${images}">
+                    <c:forEach var="image_stone" varStatus="loop" items="${image_stones}">
                         <tr>
                             <td>${loop.count}</td>
-                            <td>${image.stone_id}</td>
-                            <td><a href="/image?action=view&id=${image.id}"><img src="${image.link}" alt=""
-                                                                                 width="400px" height="400px"></a></td>
+                            <td>${image_stone.getImage().getId()}</td>
+                            <td>${image_stone.getStone_name()}</td>
+                            <td><a href="/image?action=view&id=${image_stone.getImage().getId()}"><img
+                                    src="${image_stone.getImage().getLink()}" alt=""
+                                    width="400px" height="400px"></a></td>
                             <td>
-                                <a href="/image?action=edit&id=${image.id}" class="btn btn-primary"><i
+                                <a href="/image?action=edit&id=${image_stone.getImage().getId()}"
+                                   class="btn btn-primary"><i
                                         class="fas fa-edit"></i></a>
                             </td>
                             <td>
-                                <a href="/image?action=delete&id=${image.id}" class="btn btn-danger"><i
+                                <a href="/image?action=delete&id=${image_stone.getImage().getId()}"
+                                   class="btn btn-danger"><i
                                         class="fas fa-trash"></i></a>
                             </td>
                         </tr>
