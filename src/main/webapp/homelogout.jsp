@@ -55,7 +55,7 @@
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
-                            <h3>Xin chào ${username}!</h3>
+                            <h3>Hello ${username}!</h3>
                             <a href="/login"><i class="fa fa-user"></i>Logout</a>
                         </div>
                     </div>
