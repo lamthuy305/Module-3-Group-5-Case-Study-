@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <head>
     <title>Login</title>
     <meta charset="UTF-8">
@@ -47,6 +47,9 @@
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
                 <a href="/register"><p style="margin-left: 35px">Creat New Account</p></a>
+                <c:if test="${message!=null}">
+                    <p class="alert alert-danger">${message}</p>
+                </c:if>
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">
                         Login
