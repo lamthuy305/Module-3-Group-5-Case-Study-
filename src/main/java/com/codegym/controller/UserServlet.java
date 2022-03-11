@@ -152,13 +152,13 @@ public class UserServlet extends HttpServlet {
     }
 
     private void createUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String name = request.getParameter("name");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         Date birthday = Date.valueOf(request.getParameter("birthday"));
         String address = request.getParameter("address");
         String email = request.getParameter("email");
         int role_id = Integer.parseInt(request.getParameter("role_id"));
-        User user = new User(name, password, birthday, address, email, role_id);
+        User user = new User(username, password, birthday, address, email, role_id);
         userService.create(user);
         response.sendRedirect("/users");
     }

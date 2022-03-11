@@ -15,6 +15,8 @@ import com.codegym.service.stone.IStoneService;
 import com.codegym.service.stone.StoneService;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.user.UserService;
+import com.codegym.model.User;
+
 
 import javax.servlet.*;
 import javax.servlet.http.*;

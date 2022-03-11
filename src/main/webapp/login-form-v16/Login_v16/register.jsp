@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -33,9 +33,9 @@
     <div class="container-login100" style="background-image: url('/login-form-v16/Login_v16/images/bg-01.jpg');">
         <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
-					Account Login
+					Account Register
 				</span>
-            <form method="post" action="/login?action=login" class="login100-form validate-form p-b-33 p-t-5">
+            <form method="post" action="/login" class="login100-form validate-form p-b-33 p-t-5">
 
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
                     <input class="input100" type="text" name="username" placeholder="User name">
@@ -43,13 +43,28 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="password" placeholder="Password">
+                    <input class="input100" type="text" name="password" placeholder="Password">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
-                <a href="/register"><p style="margin-left: 35px">Creat New Account</p></a>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter birthday">
+                    <input class="input100" type="date" name="birthday">
+                </div>
+
+
+                <div class="wrap-input100 validate-input" data-validate="Enter address">
+                    <input class="input100" type="text" name="address" placeholder="Address">
+                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter email">
+                    <input class="input100" type="email" name="email" placeholder="Email">
+                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                </div>
+
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">
-                        Login
+                        Register
                     </button>
                 </div>
 

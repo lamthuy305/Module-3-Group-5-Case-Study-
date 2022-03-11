@@ -51,6 +51,9 @@
                         <div class="header__top__right__auth">
                             <a href="/login"><i class="fa fa-user"></i> Login</a>
                         </div>
+                        <div class="header__top__right__auth">
+                            <a href="/register">/Register</a>
+                        </div>
                     </div>
                 </div>
             </div>
