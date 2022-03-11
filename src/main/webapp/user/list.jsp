@@ -54,9 +54,9 @@
                     <i class="fas fa-search"></i>
                 </a>
                 <div class="navbar-search-block">
-                    <form class="form-inline">
+                    <form action="/users">
                         <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar" type="search" placeholder="Search"
+                            <input class="form-control form-control-navbar" type="search" placeholder="Search" name="q"
                                    aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
@@ -274,7 +274,7 @@
                         <th scope="col">Ngày tháng năm sinh</th>
                         <th scope="col">Địa chỉ</th>
                         <th scope="col">Email</th>
-                        <th scope="col">ROLE_ID</th>
+                        <th scope="col">ROLE</th>
                         <th colspan="2"></th>
                     </tr>
                     </thead>

@@ -95,4 +95,24 @@ public class CategoryDao implements ICategoryDao {
         }
         return false;
     }
+
+    @Override
+    public List<Category> findAllByName(String q) {
+        List<Category> categories = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category WHERE name like ?");
+            preparedStatement.setString(1,q);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Category category = new Category(id, name);
+                categories.add(category);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return categories;
+    }
 }

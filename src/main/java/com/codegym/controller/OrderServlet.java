@@ -3,8 +3,8 @@ package com.codegym.controller;
 import com.codegym.dao.category.CategoryDao;
 import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.order.OrderDao;
-import com.codegym.dao.order_detail.IOrderDetailDao;
 import com.codegym.dao.stone.StoneDao;
+import com.codegym.dao.user.UserDao;
 import com.codegym.model.*;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
@@ -14,6 +14,8 @@ import com.codegym.service.order.IOrderService;
 import com.codegym.service.order.OrderService;
 import com.codegym.service.stone.IStoneService;
 import com.codegym.service.stone.StoneService;
+import com.codegym.service.user.IUserService;
+import com.codegym.service.user.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -28,6 +30,7 @@ public class OrderServlet extends HttpServlet {
     private ICategoryService categoryService;
     private IImageService imageService;
     private IOrderService orderService;
+    private IUserService userService;
 
 
     public OrderServlet() {
@@ -35,7 +38,7 @@ public class OrderServlet extends HttpServlet {
         this.categoryService = new CategoryService(new CategoryDao());
         this.imageService = new ImageService(new ImageDao());
         this.orderService = new OrderService(new OrderDao());
-
+        this.userService = new UserService(new UserDao());
     }
 
     @Override

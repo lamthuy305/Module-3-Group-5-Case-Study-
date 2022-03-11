@@ -2,7 +2,9 @@ package com.codegym.controller;
 
 import com.codegym.dao.category.CategoryDao;
 import com.codegym.dao.image.ImageDao;
+import com.codegym.dao.order.OrderDao;
 import com.codegym.dao.stone.StoneDao;
+import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
 import com.codegym.model.Image;
 import com.codegym.model.Stone;
@@ -10,8 +12,12 @@ import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 import com.codegym.service.image.IImageService;
 import com.codegym.service.image.ImageService;
+import com.codegym.service.order.IOrderService;
+import com.codegym.service.order.OrderService;
 import com.codegym.service.stone.IStoneService;
 import com.codegym.service.stone.StoneService;
+import com.codegym.service.user.IUserService;
+import com.codegym.service.user.UserService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -25,11 +31,15 @@ public class StoneServlet extends HttpServlet {
     private IStoneService stoneService;
     private ICategoryService categoryService;
     private IImageService imageService;
+    private IOrderService orderService;
+    private IUserService userService;
 
     public StoneServlet() {
         this.stoneService = new StoneService(new StoneDao());
-        this.categoryService = new CategoryService((new CategoryDao()));
-        this.imageService = new ImageService((new ImageDao()));
+        this.categoryService = new CategoryService(new CategoryDao());
+        this.imageService = new ImageService(new ImageDao());
+        this.orderService = new OrderService(new OrderDao());
+        this.userService = new UserService(new UserDao());
     }
 
     @Override
@@ -79,6 +89,10 @@ public class StoneServlet extends HttpServlet {
             }
             default: {
                 List<Stone> stones = stoneService.findAll();
+                String q = request.getParameter("q");
+                if (q != null) {
+                    stones = stoneService.findAllByName(q);
+                }
                 request.setAttribute("stones", stones);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/list.jsp");
                 dispatcher.forward(request, response);
