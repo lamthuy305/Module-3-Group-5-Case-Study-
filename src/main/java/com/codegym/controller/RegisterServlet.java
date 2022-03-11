@@ -42,27 +42,30 @@ public class RegisterServlet extends HttpServlet {
         }
         switch (action) {
             default: {
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                String birthday = request.getParameter("birthday");
-                String address = request.getParameter("address");
-                String email = request.getParameter("email");
-                boolean isUserExist = userService.checkUserNameExist(username);
-                boolean isValidPassword = userService.isValidPassword(password);
-                if (isUserExist || !isValidPassword) {
-                    request.setAttribute("message1", "Username or password is invalid");
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
-                    requestDispatcher.forward(request, response);
-                } else {
-                    request.setAttribute("message2", "Register success!");
-                    User user = new User(username, password, Date.valueOf(birthday), address, email, 2);
-                    userService.create(user);
-                    RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
-                    requestDispatcher.forward(request, response);
-                }
-
+                checkRegister(request, response);
                 break;
             }
+        }
+    }
+
+    private void checkRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String birthday = request.getParameter("birthday");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        boolean isUserExist = userService.checkUserNameExist(username);
+        boolean isValidPassword = userService.isValidPassword(password);
+        if (isUserExist || !isValidPassword) {
+            request.setAttribute("message1", "Username or password is invalid");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            request.setAttribute("message2", "Register success!");
+            User user = new User(username, password, Date.valueOf(birthday), address, email, 2);
+            userService.create(user);
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
+            requestDispatcher.forward(request, response);
         }
     }
 }
