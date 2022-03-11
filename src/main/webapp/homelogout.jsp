@@ -1,49 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%--<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>--%>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-
-    <title>Login</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vicostone</title>
+    <title>VicoStone | Home</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="/file/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/elegant-icons.css" type="text/css">
@@ -52,8 +22,8 @@
     <link rel="stylesheet" href="/file/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/style.css" type="text/css">
-
 </head>
+
 
 <body>
 
@@ -79,7 +49,7 @@
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
-                            <h3>Xin chào ${username}!</h3>
+                            <h3>Hello ${username}!</h3>
                             <a href="/login"><i class="fa fa-user"></i>Logout</a>
                         </div>
                     </div>
@@ -97,9 +67,10 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li class="active"><a href="/home">HOME</a></li>
+                        <li><a href="/orders?action=create">SHOP</a></li>
+                        <li><a href="#">WARRANTY</a>
+                        <li><a href="#">CUSTOMER SERVICE</a>
                         </li>
                     </ul>
                 </nav>
@@ -268,16 +239,6 @@
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
-
 <script src="/file/js/jquery-3.3.1.min.js"></script>
 <script src="/file/js/bootstrap.min.js"></script>
 <script src="/file/js/jquery.nice-select.min.js"></script>

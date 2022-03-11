@@ -28,7 +28,6 @@
                 <option value="3">3</option>
                 <%--                </c:forEach>--%>
             </select>
-
         </div>
         <div class="mb-3">
             <label for="stone_id" class="form-label">Stone ID</label>
@@ -37,7 +36,6 @@
                     <option value="${stone.id}">${stone.name}</option>
                 </c:forEach>
             </select>
-
         </div>
         <div class="mb-3">
             <label for="quantity" class="form-label">Quantity</label>
@@ -47,7 +45,7 @@
             <label for="date" class="form-label">Date</label>
             <input type="text" class="form-control" id="date" name="date">
         </div>
-        <button type="submit" class="btn btn-primary">Thêm mới</button>
+        <button type="submit" class="btn btn-primary">ADD</button>
     </form>
 </div>
 

@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -66,10 +68,10 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Bao hanh</a>
-                        <li><a href="#">CSKH</a>
+                        <li class="active"><a href="/home">HOME</a></li>
+                        <li><a href="/orders?action=create">SHOP</a></li>
+                        <li><a href="#">WARRANTY</a>
+                        <li><a href="#">CUSTOMER SERVICE</a>
                         </li>
                     </ul>
                 </nav>
