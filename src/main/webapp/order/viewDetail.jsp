@@ -16,13 +16,12 @@
         <thead>
         <tr>
             <th scope="col">Order_ID</th>
-            <th scope="col">order_detail_id</th>
-            <th scope="col">stone_name</th>
+            <th scope="col">Order Detail Id</th>
+            <th scope="col">Stone Type</th>
             <th scope="col">Quantity</th>
-            <th scope="col">stone_price</th>
-            <th scope="col">order_create_date</th>
-            <th scope="col">Total Order Price</th>
-
+            <th scope="col">Stone Price</th>
+            <th scope="col">Create Date</th>
+            <th scope="col">Price</th>
         </tr>
         </thead>
         <tbody>

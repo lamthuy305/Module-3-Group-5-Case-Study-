@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao implements IOrderDao {
-    public static final String DELETE_ORDER = "delete from orders where id = ?";
-    public static final String UPDATE_ORDER = "UPDATE orders SET user_id = ?, date =? WHERE id=?";
-    public static final String INSERT_ORDER = "INSERT INTO orders (user_id, date) VALUES (?,?);";
+
+    public static final String UPDATE_ORDER = "UPDATE orders SET user_id = ?, createDate =? WHERE id=?";
+    public static final String INSERT_ORDER = "INSERT INTO orders (user_id, createDate) VALUES (?,?);";
     public static final String SELECT_ONE_ORDER = "SELECT * FROM orders WHERE id = ?;";
     public static final String SELECT_ALL_ORDERS = "SELECT * FROM orders; ";
+    public static final String DELETE_ORDER = "call deleteOrder(?) ";
     private Connection connection = DBConnection.getConnection();
 
 
@@ -50,7 +51,7 @@ public class OrderDao implements IOrderDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int user_id = resultSet.getInt("user_id");
-                String date = resultSet.getString("date");
+                String date = resultSet.getString("createDate");
                 order = new Order(id, user_id, date);
             }
         } catch (SQLException e) {
@@ -76,8 +77,9 @@ public class OrderDao implements IOrderDao {
     public boolean updateById(int id, Order order) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ORDER);
-            preparedStatement.setString(1, order.getDate());
-            preparedStatement.setInt(2, id);
+            preparedStatement.setInt(1, order.getUser_id());
+            preparedStatement.setString(2, order.getDate());
+            preparedStatement.setInt(3,id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,13 +90,12 @@ public class OrderDao implements IOrderDao {
     @Override
     public boolean deleteById(int id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ORDER);
-            preparedStatement.setInt(1, id);
-            return preparedStatement.executeUpdate() > 0;
+            CallableStatement callableStatement = connection.prepareCall(DELETE_ORDER);
+            callableStatement.setInt(1,id);
+            return callableStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
     }
-
 }

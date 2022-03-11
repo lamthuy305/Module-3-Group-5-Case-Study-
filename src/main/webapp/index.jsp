@@ -68,6 +68,7 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
+
                         <li class="active"><a href="/home">Home</a></li>
                         <li><a href="/orders?action=create">Shopping</a></li>
                         <li><a href="#">WARRANTY</a>

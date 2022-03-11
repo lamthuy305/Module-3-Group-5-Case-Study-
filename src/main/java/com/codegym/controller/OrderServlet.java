@@ -116,7 +116,7 @@ public class OrderServlet extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 int user_id = Integer.parseInt(request.getParameter("user_id"));
                 String date = request.getParameter("date");
-                Order order = new Order(user_id, date);
+                Order order = new Order(id,user_id, date);
                 orderService.updateById(id, order);
                 response.sendRedirect("/orders");
                 break;

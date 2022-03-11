@@ -46,7 +46,7 @@
                     <input class="input100" type="password" name="password" placeholder="Password">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
-                <a href="/register"><p style="margin-left: 35px">Creat New Account</p></a>
+                <a href="/register"><p style="text-align: center;color: grey">Create New Account</p></a>
                 <c:if test="${message!=null}">
                     <p class="alert alert-danger">${message}</p>
                 </c:if>
