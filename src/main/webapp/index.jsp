@@ -8,7 +8,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>VicoStone | Home</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
@@ -38,15 +38,18 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                        <div class="header__top__right__social">
-                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-                        </div>
+                            <div class="header__top__right__social">
+                                <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                            </div>
                         <div class="header__top__right__language">
                             <img src="img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
                             <a href="/login"><i class="fa fa-user"></i>Login</a>
+                        </div>
+                        <div class="header__top__right__auth">
+                            <a href="/register">/Register</a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +68,8 @@
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
                         <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="#">Bao hanh</a>
+                        <li><a href="#">CSKH</a>
                         </li>
                     </ul>
                 </nav>
