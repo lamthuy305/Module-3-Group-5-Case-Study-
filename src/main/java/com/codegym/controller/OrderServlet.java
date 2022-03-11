@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.dao.category.CategoryDao;
 import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.order.OrderDao;
+import com.codegym.dao.order_detail.IOrderDetailDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.model.*;
 import com.codegym.service.category.CategoryService;
@@ -28,11 +29,13 @@ public class OrderServlet extends HttpServlet {
     private IImageService imageService;
     private IOrderService orderService;
 
+
     public OrderServlet() {
         this.stoneService = new StoneService(new StoneDao());
         this.categoryService = new CategoryService(new CategoryDao());
         this.imageService = new ImageService(new ImageDao());
         this.orderService = new OrderService(new OrderDao());
+
     }
 
     @Override
@@ -72,6 +75,7 @@ public class OrderServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
+
             default: {
                 List<Order> orders = orderService.findAll();
                 request.setAttribute("orders", orders);
@@ -93,10 +97,8 @@ public class OrderServlet extends HttpServlet {
         switch (action) {
             case "create": {
                 int user_id = Integer.parseInt(request.getParameter("user_id"));
-                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String date = request.getParameter("date");
-                Order order = new Order(user_id, stone_id, quantity, date);
+                Order order = new Order(user_id, date);
                 orderService.create(order);
                 response.sendRedirect("/orders");
                 break;
@@ -110,10 +112,8 @@ public class OrderServlet extends HttpServlet {
             case "edit": {
                 int id = Integer.parseInt(request.getParameter("id"));
                 int user_id = Integer.parseInt(request.getParameter("user_id"));
-                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String date = request.getParameter("date");
-                Order order = new Order(user_id, stone_id, quantity, date);
+                Order order = new Order(user_id, date);
                 orderService.updateById(id, order);
                 response.sendRedirect("/orders");
                 break;
