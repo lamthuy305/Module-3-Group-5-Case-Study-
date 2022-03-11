@@ -23,8 +23,7 @@ public class LoginServlet extends HttpServlet {
         }
         switch (action) {
             default:
-                RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
-                dispatcher.forward(request, response);
+                showFormLogin(request, response);
                 break;
         }
 
@@ -38,24 +37,34 @@ public class LoginServlet extends HttpServlet {
         }
         switch (action) {
             case "login":
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                int role_id = userService.findRoleId(username, password);
+                checkLogin(request, response);
+                break;
+        }
+    }
+
+
+    private void showFormLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        int role_id = userService.findRoleId(username, password);
 //                boolean isUser = userService.checkLogin(username, password);
-                if (role_id == 1) {
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
-                    dispatcher.forward(request, response);
-                } else if (role_id == 2) {
-                    request.setAttribute("username", username);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("homelogout.jsp");
-                    dispatcher.forward(request, response);
-                }
-            {
-                request.setAttribute("message", "Username or password is not exactly!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
-                dispatcher.forward(request, response);
-            }
-            break;
+        if (role_id == 1) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
+            dispatcher.forward(request, response);
+        } else if (role_id == 2) {
+            request.setAttribute("username", username);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("homelogout.jsp");
+            dispatcher.forward(request, response);
+        }
+        {
+            request.setAttribute("message", "Username or password is not exactly!");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }

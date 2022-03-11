@@ -16,6 +16,7 @@ public class UserDao implements IUserDao {
     public static final String DELETE_USER = "delete from users where id = ?";
     public static final String SELECT_ALL_GUEST_FROM_USERS = "select * from users where role_id = 2";
     public static final String FIND_USERNAME_PASSWORD = "SELECT * from users where username= ? and password= ?";
+    public static final String FIND_USERNAME = "select username from users where username = ?";
     Connection connection = DBConnection.getConnection();
 
     @Override
@@ -162,6 +163,22 @@ public class UserDao implements IUserDao {
             e.printStackTrace();
         }
         return role_id;
+    }
+    public boolean checkUserNameExist(String username)
+    {
+        boolean isUsernameExist=false;
+        try {
+           PreparedStatement preparedStatement = connection.prepareStatement(FIND_USERNAME);
+            preparedStatement.setString(1,username);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                isUsernameExist=true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return isUsernameExist;
     }
 }
 

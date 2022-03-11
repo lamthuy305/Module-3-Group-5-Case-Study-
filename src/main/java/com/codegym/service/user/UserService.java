@@ -4,8 +4,10 @@ import com.codegym.dao.user.IUserDao;
 import com.codegym.model.User;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class UserService implements IUserService{
+    public static final String REGEX_FOR_PASSWORD = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
     IUserDao userDao;
 
     public UserService(IUserDao userDao){
@@ -50,5 +52,16 @@ public class UserService implements IUserService{
     @Override
     public int findRoleId(String username, String password) {
         return userDao.findRoleId(username,password);
+    }
+
+    @Override
+    public boolean checkUserNameExist(String username) {
+        return userDao.checkUserNameExist(username);
+    }
+
+    @Override
+    public boolean isValidPassword(String password) {
+        Pattern pattern=Pattern.compile(REGEX_FOR_PASSWORD);
+        return pattern.matcher(password).matches();
     }
 }
