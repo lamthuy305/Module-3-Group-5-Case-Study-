@@ -1,11 +1,15 @@
 package com.codegym.controller;
 
 import com.codegym.dao.category.CategoryDao;
+import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
+import com.codegym.model.Stone;
 import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
+import com.codegym.service.stone.IStoneService;
+import com.codegym.service.stone.StoneService;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.user.UserService;
 
@@ -19,6 +23,7 @@ import java.util.List;
 public class LoginServlet extends HttpServlet {
     private IUserService userService = new UserService(new UserDao());
     private ICategoryService categoryService = new CategoryService(new CategoryDao());
+    private IStoneService stoneService = new StoneService(new StoneDao());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,30 +54,34 @@ public class LoginServlet extends HttpServlet {
 
 
     private void showFormLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/login.jsp");
         dispatcher.forward(request, response);
     }
 
     private void checkLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
+        HttpSession session = request.getSession();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         int role_id = userService.findRoleId(username, password);
         if (role_id == 1) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
+            User user = userService.findByUsername(username);
+            session.setAttribute("user", user);
+            request.setAttribute("user", user);
+            request.setAttribute("username", username);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login-form-v16/admin.jsp");
             dispatcher.forward(request, response);
         } else if (role_id == 2) {
-            HttpSession session = request.getSession();
             User user = userService.findByUsername(username);
-            List<Category> categories = categoryService.findAll();
             session.setAttribute("user", user);
             request.setAttribute("user", user);
             request.setAttribute("username", username);
             request.setAttribute("categories", categories);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("homelogout.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login-form-v16/homelogout.jsp");
             dispatcher.forward(request, response);
         }
         request.setAttribute("message", "Username or password is not exactly!");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/login.jsp");
         dispatcher.forward(request, response);
     }
 }

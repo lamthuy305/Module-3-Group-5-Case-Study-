@@ -7,6 +7,7 @@ import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
 import com.codegym.model.Stone;
+import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 import com.codegym.service.image.IImageService;
@@ -78,6 +79,10 @@ public class CategoryServlet extends HttpServlet {
                 break;
             }
             default: {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
                 List<Category> categories = categoryService.findAll();
                 String q = request.getParameter("q");
                 if (q != null) {

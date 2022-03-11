@@ -30,7 +30,7 @@ public class RegisterServlet extends HttpServlet {
     }
 
     private void showFormRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/register.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -58,13 +58,13 @@ public class RegisterServlet extends HttpServlet {
         boolean isValidPassword = userService.isValidPassword(password);
         if (isUserExist || !isValidPassword) {
             request.setAttribute("message1", "Username or password is invalid");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/register.jsp");
             requestDispatcher.forward(request, response);
         } else {
             request.setAttribute("message2", "Register success!");
             User user = new User(username, password, Date.valueOf(birthday), address, email, 2);
             userService.create(user);
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/register.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("login-form-v16/register.jsp");
             requestDispatcher.forward(request, response);
         }
     }

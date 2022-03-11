@@ -77,7 +77,7 @@ public class OrderServlet extends HttpServlet {
                 } else {
                     String msg = "Please sign in before shopping";
                     request.setAttribute("msg", msg);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/Login_v16/login.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/login.jsp");
                     dispatcher.forward(request, response);
                     break;
                 }
@@ -93,6 +93,10 @@ public class OrderServlet extends HttpServlet {
             }
 
             default: {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.setAttribute("user", user);
+                request.setAttribute("user", user);
                 List<Order> orders;
                 String q = request.getParameter("q");
                 if (q != null) {

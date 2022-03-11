@@ -101,6 +101,10 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showListUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        session.setAttribute("user", user);
+        request.setAttribute("user", user);
         List<User> users;
         String q = request.getParameter("q");
         if (q != null) {

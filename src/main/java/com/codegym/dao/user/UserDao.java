@@ -17,7 +17,6 @@ public class UserDao implements IUserDao {
     public static final String UPDATE_USER = "UPDATE users SET username = ?, password = ?, birthday = ?, address = ?, email=?,role_id =? where  id = ?";
     public static final String DELETE_USER = "delete from users where id = ?";
     public static final String SELECT_ALL_GUEST_FROM_USERS = "select * from users where role_id = 2";
-    public static final String FIND_USERNAME_PASSWORD = "SELECT * from users where username= ? and password= ?";
     public static final String FIND_USERNAME = "select username from users where username = ?";
     Connection connection = DBConnection.getConnection();
 
