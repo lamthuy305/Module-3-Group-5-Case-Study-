@@ -102,9 +102,17 @@ public class CategoryServlet extends HttpServlet {
         switch (action) {
             case "create": {
                 String name = request.getParameter("name");
-                Category category = new Category(name);
-                categoryService.create(category);
-                response.sendRedirect("/category");
+                if (categoryService.checkCategory(name)) {
+                    String msg = "Category existed";
+                    request.setAttribute("msg", msg);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/category/create.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                } else {
+                    Category category = new Category(name);
+                    categoryService.create(category);
+                    response.sendRedirect("/category");
+                }
                 break;
             }
             case "delete": {

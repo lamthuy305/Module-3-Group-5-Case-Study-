@@ -36,10 +36,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="/home" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/login" class="nav-link">Logout</a>
@@ -267,9 +264,9 @@
             <div class="container-fluid">
 
                 <h1 style="text-align: center ">List Image</h1>
-                <a href="/image?action=create" class="btn btn-primary"><b>Add Image</b></a>
-                <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
-
+                <div class="col-12" style="text-align: right ; margin-bottom: 20px">
+                    <a href="/image?action=create" class="btn btn-primary"><b>Add Image</b></a>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                     <tr>

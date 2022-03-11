@@ -36,11 +36,9 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
+                <a href="/home" class="nav-link">Home</a>
             </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
-            </li>
+
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/login" class="nav-link">Logout</a>
             </li>
@@ -266,32 +264,32 @@
             <div class="container-fluid">
 
                 <h1 style="text-align: center ">List Order</h1>
-                <a href="/image?action=create" class="btn btn-primary"><b>Add Image</b></a>
-                <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
-
+                <div class="col-12" style="text-align: right ; margin-bottom: 20px">
+                    <a href="/image?action=create" class="btn btn-primary"><b>Add Image</b></a>
+                </div>
                 <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Order ID</th>
-            <th scope="col">User ID</th>
-            <th scope="col">Date</th>
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Date</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="order" varStatus="loop" items="${orders}">
-            <tr>
-                <td>${loop.count}</td>
-                <td><a href="/ordersDetail?action=viewDetail&id=${order.id}">${order.id}</a></td>
-                <td>${order.user_id}</td>
-                <td>${order.date}</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="order" varStatus="loop" items="${orders}">
+                        <tr>
+                            <td>${loop.count}</td>
+                            <td><a href="/ordersDetail?action=viewDetail&id=${order.id}">${order.id}</a></td>
+                            <td>${order.user_id}</td>
+                            <td>${order.date}</td>
 
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-</div>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </div>
 </div>

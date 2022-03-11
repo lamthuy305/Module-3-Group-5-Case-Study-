@@ -36,10 +36,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="/home" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/login" class="nav-link">Logout</a>
@@ -264,11 +261,10 @@
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
-
                 <h1 style="text-align: center ">List Category</h1>
-                <a href="/category?action=create" class="btn btn-primary"><b>Add List Category</b></a>
-                <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
-
+                <div class="col-12" style="text-align: right ; margin-bottom: 20px">
+                    <a href="/category?action=create" class="btn btn-primary"><b>Add List Category</b></a>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                     <tr>

@@ -43,4 +43,16 @@ public class CategoryService implements ICategoryService {
         q = "%" + q + "%";
         return categoryDao.findAllByName(q);
     }
+
+
+    @Override
+    public boolean checkCategory(String name) {
+        List<Category> categories = findAll();
+        for (Category category : categories) {
+            if (category.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

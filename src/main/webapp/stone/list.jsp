@@ -36,10 +36,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="/home" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/login" class="nav-link">Logout</a>
@@ -266,12 +263,13 @@
             <div class="container-fluid">
 
                 <h1 style="text-align: center ">List Stone</h1>
-                <a href="/stones?action=create" class="btn btn-primary"><b>Add Stone</b></a>
-                <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
-
+                <div class="col-12" style="text-align: right">
+                    <a href="/stones?action=create" class="btn btn-primary"
+                       style="text-align: right ; margin-bottom: 20px"><b>Add Stone</b></a>
+                </div>
                 <table class="table table-bordered">
                     <thead>
-                    <tr>
+                    <tr style="text-align: center">
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
@@ -291,8 +289,7 @@
                             <td>${stone.description}</td>
                             <td>${stone.category_id}</td>
                             <td><a href="/stones?action=view&id=${stone.id}"><img src="${stone.image}" alt=""
-                                                                                  width="100"
-                                                                                  height="100"></a></td>
+                                                                                  width="100" height="100"></a></td>
                             <td><a href="/stones?action=edit&id=${stone.id}" class="btn btn-primary"><i
                                     class="fas fa-edit"></i></a></td>
                             <td><a href="/stones?action=delete&id=${stone.id}" class="btn btn-danger"><i

@@ -111,14 +111,24 @@ public class StoneServlet extends HttpServlet {
 
         switch (action) {
             case "create": {
-                String name = request.getParameter("name");
-                double price = Double.parseDouble(request.getParameter("price"));
-                String description = request.getParameter("description");
-                String image = request.getParameter("image");
                 int category_id = Integer.parseInt(request.getParameter("category_id"));
-                Stone stone = new Stone(name, price, description, image, category_id);
-                stoneService.create(stone);
-                response.sendRedirect("/stones");
+                if (category_id != 0) {
+                    String name = request.getParameter("name");
+                    double price = Double.parseDouble(request.getParameter("price"));
+                    String description = request.getParameter("description");
+                    String image = request.getParameter("image");
+                    Stone stone = new Stone(name, price, description, image, category_id);
+                    stoneService.create(stone);
+                    response.sendRedirect("/stones");
+                    break;
+                } else {
+                    List<Category> categories = categoryService.findAll();
+                    String msg = "Chua chon Category";
+                    request.setAttribute("categories", categories);
+                    request.setAttribute("msg", msg);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/create.jsp");
+                    dispatcher.forward(request, response);
+                }
                 break;
             }
             case "delete": {
