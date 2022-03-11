@@ -36,14 +36,7 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+
     <link rel="stylesheet" href="/file/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/elegant-icons.css" type="text/css">
@@ -98,7 +91,7 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
+                        <li><a href="/orders?action=create">Shopping</a></li>
                         <li><a href="#">Pages</a>
                         </li>
                     </ul>
@@ -269,14 +262,6 @@
 
 <!-- Js Plugins -->
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/main.js"></script>
 
 <script src="/file/js/jquery-3.3.1.min.js"></script>
 <script src="/file/js/bootstrap.min.js"></script>

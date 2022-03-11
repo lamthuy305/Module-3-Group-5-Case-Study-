@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -24,7 +26,6 @@
 
 <body>
 
-
 <!-- Header Section Begin -->
 <header class="header">
     <div class="header__top">
@@ -39,9 +40,9 @@
                 </div>
                 <div class="col-lg-6 col-md-6">
                     <div class="header__top__right">
-                            <div class="header__top__right__social">
-                                <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-                            </div>
+                        <div class="header__top__right__social">
+                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                        </div>
                         <div class="header__top__right__language">
                             <img src="img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
@@ -67,10 +68,10 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Bao hanh</a>
-                        <li><a href="#">CSKH</a>
+                        <li class="active"><a href="/home">HOME</a></li>
+                        <li><a href="/orders?action=create">SHOP</a></li>
+                        <li><a href="#">WARRANTY</a>
+                        <li><a href="#">CUSTOMER SERVICE</a>
                         </li>
                     </ul>
                 </nav>
@@ -252,4 +253,3 @@
 </body>
 
 </html>
-
