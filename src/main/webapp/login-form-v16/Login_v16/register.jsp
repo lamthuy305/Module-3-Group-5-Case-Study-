@@ -62,11 +62,6 @@
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" disabled="2">
-                    <input class="input100" type="text" name="role_user" placeholder="Role_User">
-                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                </div>
-
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">
                         Register

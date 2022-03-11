@@ -68,7 +68,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/register");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/user/create.jsp");
         dispatcher.forward(request, response);
     }
 

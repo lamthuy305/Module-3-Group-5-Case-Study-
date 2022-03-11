@@ -1,5 +1,7 @@
 package com.codegym.controller;
 
+import com.codegym.model.User;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
