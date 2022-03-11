@@ -32,6 +32,7 @@ public class OrderServlet extends HttpServlet {
     private IOrderService orderService;
     private IUserService userService;
 
+
     public OrderServlet() {
         this.stoneService = new StoneService(new StoneDao());
         this.categoryService = new CategoryService(new CategoryDao());
@@ -77,6 +78,7 @@ public class OrderServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
+
             default: {
                 List<Order> orders = orderService.findAll();
                 request.setAttribute("orders", orders);
@@ -98,10 +100,8 @@ public class OrderServlet extends HttpServlet {
         switch (action) {
             case "create": {
                 int user_id = Integer.parseInt(request.getParameter("user_id"));
-                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String date = request.getParameter("date");
-                Order order = new Order(user_id, stone_id, quantity, date);
+                Order order = new Order(user_id, date);
                 orderService.create(order);
                 response.sendRedirect("/orders");
                 break;
@@ -115,10 +115,8 @@ public class OrderServlet extends HttpServlet {
             case "edit": {
                 int id = Integer.parseInt(request.getParameter("id"));
                 int user_id = Integer.parseInt(request.getParameter("user_id"));
-                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
-                int quantity = Integer.parseInt(request.getParameter("quantity"));
                 String date = request.getParameter("date");
-                Order order = new Order(user_id, stone_id, quantity, date);
+                Order order = new Order(user_id, date);
                 orderService.updateById(id, order);
                 response.sendRedirect("/orders");
                 break;
