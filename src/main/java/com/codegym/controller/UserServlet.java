@@ -23,6 +23,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users")
@@ -88,7 +89,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/user/create.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("adminDoRegister.jsp");
         dispatcher.forward(request, response);
     }
 

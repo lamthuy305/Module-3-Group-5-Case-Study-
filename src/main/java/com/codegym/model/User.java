@@ -14,6 +14,7 @@ public class User {
     public User() {
     }
 
+
     public User(int id, String username, String password, Date birthday, String address, String email,int role_id) {
         this.id = id;
         this.username = username;

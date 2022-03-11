@@ -68,7 +68,12 @@
                     <input class="input100" type="email" name="email" placeholder="Email">
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
-
+                <div class="wrap-input100 validate-select" data-validate="Select user" style="text-align: center">
+                    <select name="role_id" style="width: 300px;height: 30px">
+                            <option value="1" style="text-align: center">Role Admin</option>
+                            <option value="2" style="text-align: center">Role User</option>
+                    </select>
+                </div>
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">
                         Register
