@@ -101,7 +101,7 @@ public class CategoryDao implements ICategoryDao {
         List<Category> categories = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category WHERE name like ?");
-            preparedStatement.setString(1,q);
+            preparedStatement.setString(1, q);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -115,4 +115,5 @@ public class CategoryDao implements ICategoryDao {
 
         return categories;
     }
+
 }

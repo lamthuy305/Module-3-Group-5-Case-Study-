@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface ICategoryService extends IGeneralService<Category> {
     List<Category> findAllByName(String q);
+    boolean checkCategory(String name);
+
 
 }

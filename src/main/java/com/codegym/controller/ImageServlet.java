@@ -108,12 +108,23 @@ public class ImageServlet extends HttpServlet {
 
         switch (action) {
             case "create": {
-                String link = request.getParameter("link");
                 int stone_Id = Integer.parseInt(request.getParameter("stone_id"));
-                Image image = new Image(link, stone_Id);
-                imageService.create(image);
-                response.sendRedirect("/image");
+                if (stone_Id != 0) {
+                    String link = request.getParameter("link");
+                    Image image = new Image(link, stone_Id);
+                    imageService.create(image);
+                    response.sendRedirect("/image");
+                    break;
+                } else {
+                    List<Stone> stones = stoneService.findAll();
+                    String msg = "Chua chon stone ID";
+                    request.setAttribute("msg", msg);
+                    request.setAttribute("stones", stones);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/image/create.jsp");
+                    dispatcher.forward(request, response);
+                }
                 break;
+
             }
             case "delete": {
                 int id = Integer.parseInt(request.getParameter("id"));

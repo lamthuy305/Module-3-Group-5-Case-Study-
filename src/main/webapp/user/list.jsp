@@ -36,10 +36,7 @@
                 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="index3.html" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="/home" class="nav-link">Home</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="/login" class="nav-link">Logout</a>
@@ -265,7 +262,9 @@
         <section class="content">
             <div class="container-fluid">
                 <h1>Danh sách người dùng</h1>
-                <a class="btn btn-primary float-end" href="/users?action=create">Tạo mới</a>
+                <div class="col-12" style="text-align: right ; margin-bottom: 20px">
+                    <a class="btn btn-primary float-end" href="/users?action=create">Tạo mới</a>
+                </div>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
