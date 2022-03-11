@@ -31,7 +31,7 @@ public class OrderDao implements IOrderDao {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 int user_id = resultSet.getInt("user_id");
-                String date = resultSet.getString("date");
+                String date = resultSet.getString("createDate");
                 Order order = new Order(id, user_id, date);
                 orders.add(order);
             }
@@ -96,22 +96,5 @@ public class OrderDao implements IOrderDao {
         }
         return false;
     }
-@Override
-    public List<Order> showOrderDetailById(int id) {
-        List<Order> orderDetails = new ArrayList<>();
-        try {
-            CallableStatement callableStatement = connection.prepareCall("call getOrderPrice(?)");
-            callableStatement.setInt(1,id);
-            ResultSet resultSet = callableStatement.executeQuery();
-            while (resultSet.next()){
-               int quantity = resultSet.getInt("quantity");
-               double orderPrice = resultSet.getDouble(("(od.quantity*s.price"));// ???
-               OrderDetail orderDetail = new OrderDetail(quantity,orderPrice);
-               orderDetails.add(orderDetail);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return orderDetails;
-    }
+
 }

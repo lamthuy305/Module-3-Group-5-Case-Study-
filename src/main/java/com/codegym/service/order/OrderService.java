@@ -2,6 +2,8 @@ package com.codegym.service.order;
 
 import com.codegym.dao.order.IOrderDao;
 import com.codegym.model.Order;
+import com.codegym.model.OrderDetail;
+import com.codegym.model.ViewOrderDetail;
 
 import java.util.List;
 
@@ -35,11 +37,6 @@ public class OrderService implements IOrderService {
     @Override
     public boolean deleteById(int id) {
         return orderDao.deleteById(id);
-    }
-
-    @Override
-    public List<Order> showOrderDetailById(int id){
-        return orderDao.showOrderDetailById(id);
     }
 
 }

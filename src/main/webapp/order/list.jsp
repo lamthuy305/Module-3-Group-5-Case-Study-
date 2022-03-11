@@ -265,7 +265,7 @@
         <section class="content">
             <div class="container-fluid">
 
-                <h1 style="text-align: center ">List Category</h1>
+                <h1 style="text-align: center ">List Order</h1>
                 <a href="/image?action=create" class="btn btn-primary"><b>Add Image</b></a>
                 <%--    <a href="/stones?action=find" class="btn btn-primary"><b>Tìm kiếm khách hàng theo ID</b></a>--%>
 
@@ -273,26 +273,20 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Order ID</th>
             <th scope="col">User ID</th>
-            <th scope="col">Stone ID</th>
-            <th scope="col">Quantity</th>
             <th scope="col">Date</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+
         </tr>
         </thead>
         <tbody>
         <c:forEach var="order" varStatus="loop" items="${orders}">
             <tr>
                 <td>${loop.count}</td>
+                <td><a href="/ordersDetail?action=viewDetail&id=${order.id}">${order.id}</a></td>
                 <td>${order.user_id}</td>
-                <td>${order.stone_id}</td>
-                <td>${order.quantity}</td>
                 <td>${order.date}</td>
-                <td><a href="/stones?action=edit&id=${stone.id}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                </td>
-                <td><a href="/orders?action=delete&id=${order.id}" class="btn btn-danger"><i
-                        class="fas fa-trash"></i></a></td>
+
             </tr>
         </c:forEach>
         </tbody>

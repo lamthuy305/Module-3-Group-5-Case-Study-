@@ -7,5 +7,5 @@ import com.codegym.model.OrderDetail;
 import java.util.List;
 
 public interface IOrderDao extends IGeneralDao<Order> {
-    List<Order> showOrderDetailById(int id);
+
 }

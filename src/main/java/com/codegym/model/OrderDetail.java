@@ -2,23 +2,26 @@ package com.codegym.model;
 
 import java.util.List;
 
-public class OrderDetail extends Order {
+public class OrderDetail {
     private int id;
+    private int order_id;
+    private int stone_id;
     private int quantity;
-    private double orderPrice;
 
     public OrderDetail() {
     }
 
-    public OrderDetail(int id, int quantity, double orderPrice){
-        this.id = id;
+    public OrderDetail(int order_id, int stone_id, int quantity) {
+        this.order_id = order_id;
+        this.stone_id = stone_id;
         this.quantity = quantity;
-        this.orderPrice = orderPrice;
     }
 
-    public OrderDetail(int quantity, double orderPrice){
+    public OrderDetail(int id, int order_id, int stone_id, int quantity) {
+        this.id = id;
+        this.order_id = order_id;
+        this.stone_id = stone_id;
         this.quantity = quantity;
-        this.orderPrice = orderPrice;
     }
 
     public int getId() {
@@ -37,12 +40,21 @@ public class OrderDetail extends Order {
         this.quantity = quantity;
     }
 
-    public double getOrderPrice() {
-        return orderPrice;
+    public int getOrder_id() {
+        return order_id;
     }
 
-    public void setOrderPrice(double orderPrice) {
-        this.orderPrice = orderPrice;
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
+
+    public int getStone_id() {
+        return stone_id;
+    }
+
+    public void setStone_id(int stone_id) {
+        this.stone_id = stone_id;
+    }
+
 }
 

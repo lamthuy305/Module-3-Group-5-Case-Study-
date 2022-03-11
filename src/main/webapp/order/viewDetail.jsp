@@ -1,10 +1,4 @@
-%--
-  Created by IntelliJ IDEA.
-  User: This
-  Date: 3/7/2022
-  Time: 5:26 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -17,26 +11,30 @@
 </head>
 <body>
 <div class="container">
-    <h1 style="text-align: center " >Orders List</h1>
-<%--    <a href="/stones?action=create" class="btn btn-primary"><b>Add Stone</b></a>--%>
+    <h1 style="text-align: center " >Order Detail</h1>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">User_ID</th>
-            <th scope="col">Date</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col">Order_ID</th>
+            <th scope="col">order_detail_id</th>
+            <th scope="col">stone_name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">stone_price</th>
+            <th scope="col">order_create_date</th>
+            <th scope="col">Total Order Price</th>
+
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="order" items="${orders}">
+        <c:forEach var="viewOrderDetail" items="${viewOrderDetails}">
             <tr>
-                <td>${order.id}</td>
-                <td>${order.user_id}</td>
-                <td><a href="/category?action=view&id=${order.id}">${order.date}</a></td>
-                <td><a href="/stones?action=edit&id=${stone.id}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
-                <td><a href="/orders?action=delete&id=${order.id}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+                <td>${viewOrderDetail.order_id}</td>
+                <td>${viewOrderDetail.order_detail_id}</td>
+                <td>${viewOrderDetail.stone_name}</td>
+                <td>${viewOrderDetail.quantity}</td>
+                <td>${viewOrderDetail.stone_price}</td>
+                <td>${viewOrderDetail.order_create_date}</td>
+                <td>${viewOrderDetail.quantity*viewOrderDetail.stone_price}</td>
             </tr>
         </c:forEach>
         </tbody>

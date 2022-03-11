@@ -3,6 +3,7 @@ package com.codegym.controller;
 import com.codegym.dao.category.CategoryDao;
 import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.order.OrderDao;
+import com.codegym.dao.order_detail.IOrderDetailDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.model.*;
 import com.codegym.service.category.CategoryService;
@@ -28,11 +29,13 @@ public class OrderServlet extends HttpServlet {
     private IImageService imageService;
     private IOrderService orderService;
 
+
     public OrderServlet() {
         this.stoneService = new StoneService(new StoneDao());
         this.categoryService = new CategoryService(new CategoryDao());
         this.imageService = new ImageService(new ImageDao());
         this.orderService = new OrderService(new OrderDao());
+
     }
 
     @Override
@@ -72,6 +75,7 @@ public class OrderServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
+
             default: {
                 List<Order> orders = orderService.findAll();
                 request.setAttribute("orders", orders);
