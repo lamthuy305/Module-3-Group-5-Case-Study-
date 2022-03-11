@@ -1,8 +1,20 @@
 package com.codegym.controller;
 
+import com.codegym.dao.category.CategoryDao;
+import com.codegym.dao.image.ImageDao;
+import com.codegym.dao.order.OrderDao;
+import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
 import com.codegym.model.Role;
 import com.codegym.model.User;
+import com.codegym.service.category.CategoryService;
+import com.codegym.service.category.ICategoryService;
+import com.codegym.service.image.IImageService;
+import com.codegym.service.image.ImageService;
+import com.codegym.service.order.IOrderService;
+import com.codegym.service.order.OrderService;
+import com.codegym.service.stone.IStoneService;
+import com.codegym.service.stone.StoneService;
 import com.codegym.service.user.IUserService;
 import com.codegym.service.user.UserService;
 
@@ -15,9 +27,17 @@ import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/users")
 public class UserServlet extends HttpServlet {
+    private IStoneService stoneService;
+    private ICategoryService categoryService;
+    private IImageService imageService;
+    private IOrderService orderService;
     private IUserService userService;
 
     public UserServlet() {
+        this.stoneService = new StoneService(new StoneDao());
+        this.categoryService = new CategoryService(new CategoryDao());
+        this.imageService = new ImageService(new ImageDao());
+        this.orderService = new OrderService(new OrderDao());
         this.userService = new UserService(new UserDao());
     }
 
