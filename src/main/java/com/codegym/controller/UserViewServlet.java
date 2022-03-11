@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,33 +55,7 @@ public class UserViewServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-//            case "edit": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Image image = imageService.findById(id);
-//                int ston_id = image.getStone_id();
-//                Stone stone = stoneService.findById(ston_id);
-//                List<Stone> stones = stoneService.findAll();
-//                request.setAttribute("image", image);
-//                request.setAttribute("stone", stone);
-//                request.setAttribute("stones", stones);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/image/edit.jsp");
-//                dispatcher.forward(request, response);
-//            }
-//            case "delete": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Image image = imageService.findById(id);
-//                request.setAttribute("image", image);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/image/delete.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
-//            case "create": {
-//                List<Stone> stones = stoneService.findAll();
-//                request.setAttribute("stones", stones);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/image/create.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
+
             case "viewcategory": {
                 int id = Integer.parseInt(request.getParameter("id"));
                 List<Stone> stones = stoneService.findAllByCategory(id);
@@ -113,6 +88,9 @@ public class UserViewServlet extends HttpServlet {
             }
 
             default: {
+//                HttpSession session = request.getSession();
+//                session.setAttribute("user", user);
+//                request.setAttribute("user", user);
                 request.setAttribute("categories", categories);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
@@ -124,36 +102,5 @@ public class UserViewServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-
-//        switch (action) {
-//            case "create": {
-//                String link = request.getParameter("link");
-//                int stone_Id = Integer.parseInt(request.getParameter("stone_id"));
-//                Image image = new Image(link, stone_Id);
-//                imageService.create(image);
-//                response.sendRedirect("/image");
-//                break;
-//            }
-//            case "delete": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                imageService.deleteById(id);
-//                response.sendRedirect("/image");
-//                break;
-//            }
-//            case "edit": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                String link = request.getParameter("link");
-//                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
-//                Image image = new Image(id, link, stone_id);
-//                imageService.updateById(id, image);
-//                response.sendRedirect("/image");
-//                break;
-//            }
-//        }
     }
-
 }

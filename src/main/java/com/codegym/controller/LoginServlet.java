@@ -6,6 +6,7 @@ import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.order.OrderDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
+import com.codegym.model.Category;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 import com.codegym.service.image.IImageService;
@@ -21,6 +22,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
@@ -70,7 +72,9 @@ public class LoginServlet extends HttpServlet {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("admin.jsp");
                     dispatcher.forward(request, response);
                 } else if (role_id == 2) {
+                    List<Category> categories = categoryService.findAll();
                     request.setAttribute("username", username);
+                    request.setAttribute("categories", categories);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("homelogout.jsp");
                     dispatcher.forward(request, response);
                 }

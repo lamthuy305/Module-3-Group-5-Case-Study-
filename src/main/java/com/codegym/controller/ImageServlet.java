@@ -117,7 +117,7 @@ public class ImageServlet extends HttpServlet {
                     break;
                 } else {
                     List<Stone> stones = stoneService.findAll();
-                    String msg = "Chua chon stone ID";
+                    String msg = "Select type of Stone";
                     request.setAttribute("msg", msg);
                     request.setAttribute("stones", stones);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/image/create.jsp");

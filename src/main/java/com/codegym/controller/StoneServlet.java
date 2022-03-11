@@ -123,7 +123,7 @@ public class StoneServlet extends HttpServlet {
                     break;
                 } else {
                     List<Category> categories = categoryService.findAll();
-                    String msg = "Chua chon Category";
+                    String msg = "Please pick a Category";
                     request.setAttribute("categories", categories);
                     request.setAttribute("msg", msg);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/create.jsp");

@@ -47,7 +47,7 @@
                             <div>Viet Nam</div>
                         </div>
                         <div class="header__top__right__auth">
-                            <h3>Hello ${username}!</h3>
+                            <p>Hello: ${username}!</p>
                             <a href="/login"><i class="fa fa-user"></i>Logout</a>
                         </div>
                     </div>
@@ -66,9 +66,9 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Bao hanh</a>
-                        <li><a href="#">CSKH</a>
+                        <li><a href="/orders?action=create">Shopping</a></li>
+                        <li><a href="#">WARRANTY</a>
+                        <li><a href="#">Customer Service</a>
                         </li>
                     </ul>
                 </nav>
