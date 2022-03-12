@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>--%>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -48,10 +46,27 @@
                             <img src="img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
-                        <div class="header__top__right__auth">
-                            <h3>Hello ${username}!</h3>
-                            <a href="/login"><i class="fa fa-user"></i>Logout</a>
-                        </div>
+                        <c:if test="${user == null}">
+                            <div class="header__top__right__auth">
+                                <a href="/login"><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="/register">/Register</a>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${user != null}">
+                            <div class="header__top__right__auth">
+                                <p>Hello: ${user.username}!</p>
+
+                                <div class="header__top__right__auth">
+                                    <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+                                </div>
+                                <div class="header__top__right__auth">
+                                    <a href="/users?action=changepassword">/ Change Password</a>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -67,10 +82,11 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="/home">HOME</a></li>
-                        <li><a href="/orders?action=create">SHOP</a></li>
+
+                        <li class="active"><a href="/home">Home</a></li>
+                        <li><a href="/orders?action=create">Shopping</a></li>
                         <li><a href="#">WARRANTY</a>
-                        <li><a href="#">CUSTOMER SERVICE</a>
+                        <li><a href="#">Customer Service</a>
                         </li>
                     </ul>
                 </nav>
@@ -239,6 +255,7 @@
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
+
 <script src="/file/js/jquery-3.3.1.min.js"></script>
 <script src="/file/js/bootstrap.min.js"></script>
 <script src="/file/js/jquery.nice-select.min.js"></script>

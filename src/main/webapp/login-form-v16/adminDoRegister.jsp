@@ -9,11 +9,9 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="login-form-v16/Login_v16/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css"
-          href="login-form-v16/Login_v16/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="login-form-v16/Login_v16/vendor/animate/animate.css">
     <!--===============================================================================================-->
@@ -35,40 +33,47 @@
     <div class="container-login100" style="background-image: url('/login-form-v16/Login_v16/images/bg-01.jpg');">
         <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
-					Add Stone
+					Account Register
 				</span>
-            <form method="post" action="/stones?action=create" class="login100-form validate-form p-b-33 p-t-5">
-
-                <div class="wrap-input100 validate-input" data-validate="Enter name">
-                    <input class="input100" type="text" name="name" placeholder="Name">
+            <form method="post" class="login100-form validate-form p-b-33 p-t-5">
+                <c:if test="${message2!=null}">
+                    <p class="alert-success" style="margin-left: 30px;margin-right: 30px">${message2}</p>
+                </c:if>
+                <c:if test="${message1!=null}">
+                    <p class="alert-danger" style="margin-left: 30px;margin-right: 30px">${message1}</p>
+                </c:if>
+                <p style="margin-left: 30px">Have an account?  <a href="/login" style="color: #0c84ff">Login here!</a></p>
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
+                    <input class="input100" type="text" name="username" placeholder="User name">
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="text" name="price" placeholder="Price">
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input class="input100" type="password" name="password" placeholder="Password">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                    <i style="margin-left: 30px;color: #6A6A6A">(at least 6 character,1 number and 1 alphabet)</i>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter description">
-                    <input class="input100" type="text" name="description" placeholder="Description">
+                <div class="wrap-input100 validate-input" data-validate="Enter birthday">
+                    <input class="input100" type="date" name="birthday">
+                </div>
+
+
+                <div class="wrap-input100 validate-input" data-validate="Enter address">
+                    <input class="input100" type="text" name="address" placeholder="Address">
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter link image">
-                    <input class="input100" type="text" name="image" placeholder="Image">
+                <div class="wrap-input100 validate-input" data-validate="Enter email">
+                    <input class="input100" type="email" name="email" placeholder="Email">
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
-
-                <div class="wrap-input100 validate-select" data-validate="Select category" style="text-align: center">
-                    <select name="category_id" style="width: 300px;height: 30px">
-                        <option value="0" style="text-align: center">--- Select Category ---</option>
-                        <c:forEach var="category" items="${categories}">
-                            <option value="${category.id}" style="text-align: center">${category.name}</option>
-                        </c:forEach>
+                <div class="wrap-input100 validate-select" data-validate="Select user" style="text-align: center">
+                    <select name="role_id" style="width: 300px;height: 30px">
+                            <option value="1" style="text-align: center">Role Admin</option>
+                            <option value="2" style="text-align: center">Role User</option>
                     </select>
                 </div>
-                <p style="text-align: center;color: red"><c:if test="${msg!=null}">${msg}</c:if></p>
-
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">
                         Register

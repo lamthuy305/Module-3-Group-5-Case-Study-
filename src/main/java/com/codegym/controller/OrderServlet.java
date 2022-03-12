@@ -49,11 +49,7 @@ public class OrderServlet extends HttpServlet {
         }
         switch (action) {
             case "edit": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Order order = orderService.findById(id);
-                request.setAttribute("order", order);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/edit.jsp");
-                dispatcher.forward(request, response);
+                formUpdateOrder(request, response);
                 break;
             }
             case "delete": {
@@ -64,31 +60,22 @@ public class OrderServlet extends HttpServlet {
                 dispatcher.forward(request, response);
             }
             case "create": {
-                List<Stone> stones = stoneService.findAll();
-                request.setAttribute("stones", stones);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
-                dispatcher.forward(request, response);
+                formCreateOrder(request, response);
                 break;
+
             }
             case "view": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Order order = orderService.findById(id);
-                request.setAttribute("order", order);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/view.jsp");
-                dispatcher.forward(request, response);
+                formViewOrder(request, response);
                 break;
             }
 
             default: {
-                List<Order> orders = orderService.findAll();
-                request.setAttribute("orders", orders);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/list.jsp");
-                dispatcher.forward(request, response);
+                formListOrder(request, response);
                 break;
             }
         }
-
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -99,28 +86,93 @@ public class OrderServlet extends HttpServlet {
 
         switch (action) {
             case "create": {
-                int user_id = Integer.parseInt(request.getParameter("user_id"));
-                String date = request.getParameter("date");
-                Order order = new Order(user_id, date);
-                orderService.create(order);
-                response.sendRedirect("/orders");
+                createOrder(request, response);
                 break;
             }
             case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                orderService.deleteById(id);
-                response.sendRedirect("/orders");
+                deleteOrder(request, response);
                 break;
             }
             case "edit": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                int user_id = Integer.parseInt(request.getParameter("user_id"));
-                String date = request.getParameter("date");
-                Order order = new Order(id,user_id, date);
-                orderService.updateById(id, order);
-                response.sendRedirect("/orders");
+                updateOrder(request, response);
                 break;
             }
         }
     }
+
+    private void updateOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
+        String date = request.getParameter("date");
+        Order order = new Order(id, user_id, date);
+        orderService.updateById(id, order);
+        response.sendRedirect("/orders");
+    }
+
+    private void deleteOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        orderService.deleteById(id);
+        response.sendRedirect("/orders");
+    }
+
+    private void createOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int user_id = Integer.parseInt(request.getParameter("user_id"));
+        String date = request.getParameter("date");
+        Order order = new Order(user_id, date);
+        orderService.create(order);
+        response.sendRedirect("/orders");
+    }
+
+    private void formListOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        session.setAttribute("user", user);
+        request.setAttribute("user", user);
+        List<Order> orders;
+        String q = request.getParameter("q");
+        if (q != null) {
+            orders = orderService.findOrderByOrderID(q);
+        } else {
+            orders = orderService.findAll();
+        }
+        request.setAttribute("orders", orders);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formViewOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Order order = orderService.findById(id);
+        request.setAttribute("order", order);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/view.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formCreateOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Stone> stones = stoneService.findAll();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            session.setAttribute("user", user);
+            request.setAttribute("user", user);
+            request.setAttribute("stones", stones);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
+            dispatcher.forward(request, response);
+            return;
+        } else {
+            String msg = "Please sign in before shopping";
+            request.setAttribute("msg", msg);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/login.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void formUpdateOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Order order = orderService.findById(id);
+        request.setAttribute("order", order);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/edit.jsp");
+        dispatcher.forward(request, response);
+    }
+
 }

@@ -48,14 +48,27 @@
                             <img src="../img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
-                        <div class="header__top__right__auth">
-                            <a href="/login"><i class="fa fa-user"></i> Login</a>
+                        <c:if test="${user == null}">
+                            <div class="header__top__right__auth">
+                                <a href="/login"><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="/register">/Register</a>
+                            </div>
+                        </c:if>
 
-                        </div>
-                        <div class="header__top__right__auth">
-                            <a href="/register">/Register</a>
+                        <c:if test="${user != null}">
+                            <div class="header__top__right__auth">
+                                <p>Hello: ${user.username}!</p>
 
-                        </div>
+                                <div class="header__top__right__auth">
+                                    <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+                                </div>
+                                <div class="header__top__right__auth">
+                                    <a href="/users?action=changepassword">/ Change Password</a>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -72,9 +85,9 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Bao hanh</a>
-                        <li><a href="#">CSKH</a>
+                        <li><a href="/orders?action=create">Shoping</a></li>
+                        <li><a href="#">WARRANTY</a>
+                        <li><a href="#">Customer Service</a>
 
                         </li>
 

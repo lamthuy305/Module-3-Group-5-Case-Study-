@@ -4,11 +4,13 @@ import com.codegym.dao.user.IUserDao;
 import com.codegym.model.User;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
-public class UserService implements IUserService{
+public class UserService implements IUserService {
+    public static final String REGEX_FOR_PASSWORD = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
     IUserDao userDao;
 
-    public UserService(IUserDao userDao){
+    public UserService(IUserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -41,14 +43,69 @@ public class UserService implements IUserService{
     public List<User> getAllGuestUser() {
         return userDao.getAllGuestUser();
     }
-//
-//    @Override
-//    public boolean checkLogin(String username, String password) {
-//        return userDao.checkLogin(username,password);
-//    }
 
     @Override
     public int findRoleId(String username, String password) {
-        return userDao.findRoleId(username,password);
+        return userDao.findRoleId(username, password);
+    }
+
+    @Override
+    public boolean checkUserNameExist(String username) {
+        return userDao.checkUserNameExist(username);
+    }
+
+    @Override
+    public boolean isValidPassword(String password) {
+        Pattern pattern = Pattern.compile(REGEX_FOR_PASSWORD);
+        return pattern.matcher(password).matches();
+    }
+
+    @Override
+    public List<User> findUserByUserName(String q) {
+        q = "%" + q + "%";
+        return userDao.findUserByUserName(q);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    @Override
+    public String checkPasswordOld(String password, String passwordOld) {
+        String msg = null;
+        if (!password.equals(passwordOld)) {
+            msg = "Password Old sai";
+        }
+        return msg;
+    }
+
+    @Override
+    public String checkPasswordOldAndNew(String passwordOld, String passwordNew) {
+        String msg = null;
+        if (passwordNew.equals(passwordOld)) {
+            msg = "Password New phai khac Password Old \n";
+        }
+        return msg;
+    }
+
+    @Override
+    public String checkPasswordNew(String passwordNew) {
+        String msg = null;
+        Pattern pattern = Pattern.compile(REGEX_FOR_PASSWORD);
+        if (!pattern.matcher(passwordNew).matches()) {
+            msg = "Password new sai";
+        }
+        return msg;
+    }
+
+    @Override
+    public String checkEnterPasswordNew(String passwordNew, String enterPasswordNew) {
+        String msg = null;
+        if (!passwordNew.equals(enterPasswordNew)) {
+            msg = "Password new khac nhau";
+        }
+
+        return msg;
     }
 }

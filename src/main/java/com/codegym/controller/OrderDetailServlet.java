@@ -55,86 +55,24 @@ public class OrderDetailServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-//            case "edit": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Order order = orderService.findById(id);
-//                request.setAttribute("order", order);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/edit.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
-//            case "delete": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Order order = orderService.findById(id);
-//                request.setAttribute("order", order);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/delete.jsp");
-//                dispatcher.forward(request, response);
-//            }
-//            case "create": {
-//                List<Stone> stones = stoneService.findAll();
-//                request.setAttribute("stones", stones);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
-//            case "view": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                Order order = orderService.findById(id);
-//                request.setAttribute("order", order);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/view.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
             case "viewDetail":{
-                int id = Integer.parseInt(request.getParameter("id"));
-                List<ViewOrderDetail> viewOrderDetails = odService.showOrderDetailById(id);
-                request.setAttribute("viewOrderDetails",viewOrderDetails);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/viewDetail.jsp");
-                dispatcher.forward(request,response);
-
+                formViewDetail(request, response);
+                break;
             }
-//            default: {
-//                List<Order> orders = orderService.findAll();
-//                request.setAttribute("orders", orders);
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/list.jsp");
-//                dispatcher.forward(request, response);
-//                break;
-//            }
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String action = request.getParameter("action");
-//        if (action == null) {
-//            action = "";
-//        }
-//
-//        switch (action) {
-//            case "create": {
-//                int user_id = Integer.parseInt(request.getParameter("user_id"));
-//                String date = request.getParameter("date");
-//                Order order = new Order(user_id, date);
-//                orderService.create(order);
-//                response.sendRedirect("/orders");
-//                break;
-//            }
-//            case "delete": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                orderService.deleteById(id);
-//                response.sendRedirect("/orders");
-//                break;
-//            }
-//            case "edit": {
-//                int id = Integer.parseInt(request.getParameter("id"));
-//                int user_id = Integer.parseInt(request.getParameter("user_id"));
-//                String date = request.getParameter("date");
-//                Order order = new Order(user_id, date);
-//                orderService.updateById(id, order);
-//                response.sendRedirect("/orders");
-//                break;
-//            }
-//        }
     }
+
+    private void formViewDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<ViewOrderDetail> viewOrderDetails = odService.showOrderDetailById(id);
+        request.setAttribute("viewOrderDetails",viewOrderDetails);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/viewDetail.jsp");
+        dispatcher.forward(request, response);
+    }
+
+
 }

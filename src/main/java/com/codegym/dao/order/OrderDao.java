@@ -1,9 +1,7 @@
 package com.codegym.dao.order;
 
 import com.codegym.dao.DBConnection;
-import com.codegym.model.Order;
-import com.codegym.model.OrderDetail;
-import com.codegym.model.Stone;
+import com.codegym.model.*;
 import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.sql.*;
@@ -79,7 +77,7 @@ public class OrderDao implements IOrderDao {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_ORDER);
             preparedStatement.setInt(1, order.getUser_id());
             preparedStatement.setString(2, order.getDate());
-            preparedStatement.setInt(3,id);
+            preparedStatement.setInt(3, id);
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -91,11 +89,31 @@ public class OrderDao implements IOrderDao {
     public boolean deleteById(int id) {
         try {
             CallableStatement callableStatement = connection.prepareCall(DELETE_ORDER);
-            callableStatement.setInt(1,id);
+            callableStatement.setInt(1, id);
             return callableStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Order> findOrderByOrderID(String q) {
+        List<Order> orders = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from orders where id like ?;");
+            preparedStatement.setString(1, q);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String createDate = resultSet.getString("createDate");
+                Order order = new Order(id, user_id, createDate);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
 }
