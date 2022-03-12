@@ -5,7 +5,12 @@ import com.codegym.model.Order;
 import com.codegym.model.OrderDetail;
 import com.codegym.model.ViewOrderDetail;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class OrderService implements IOrderService {
     private IOrderDao orderDao;
@@ -44,4 +49,22 @@ public class OrderService implements IOrderService {
         q = "%" + q + "%";
         return orderDao.findOrderByOrderID(q);
     }
+
+    @Override
+    public int maxOrder_idNow() {
+        return orderDao.maxOrder_idNow();
+    }
+
+    @Override
+    public boolean checkCreateDateAfterDateNow(String createDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date dateCreate = java.sql.Date.valueOf(createDate);
+        Date dateNow = new Date();
+        if (dateNow.before(dateCreate)) {
+            return true;
+        }
+            return false;
+    }
+
+
 }

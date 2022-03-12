@@ -5,9 +5,7 @@ import com.codegym.dao.image.ImageDao;
 import com.codegym.dao.order.OrderDao;
 import com.codegym.dao.order_detail.OrderDetailDao;
 import com.codegym.dao.stone.StoneDao;
-import com.codegym.model.Order;
-import com.codegym.model.Stone;
-import com.codegym.model.ViewOrderDetail;
+import com.codegym.model.*;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 import com.codegym.service.image.IImageService;
@@ -25,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -36,7 +35,6 @@ public class OrderDetailServlet extends HttpServlet {
     private IImageService imageService;
     private IOrderService orderService;
     private IODService odService;
-
 
 
     public OrderDetailServlet() {
@@ -55,7 +53,7 @@ public class OrderDetailServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "viewDetail":{
+            case "viewDetail": {
                 formViewDetail(request, response);
                 break;
             }
@@ -64,12 +62,13 @@ public class OrderDetailServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
     }
 
     private void formViewDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         List<ViewOrderDetail> viewOrderDetails = odService.showOrderDetailById(id);
-        request.setAttribute("viewOrderDetails",viewOrderDetails);
+        request.setAttribute("viewOrderDetails", viewOrderDetails);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/order/viewDetail.jsp");
         dispatcher.forward(request, response);
     }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface IOrderDao extends IGeneralDao<Order> {
     List<Order> findOrderByOrderID(String q);
 
+    int maxOrder_idNow();
 }

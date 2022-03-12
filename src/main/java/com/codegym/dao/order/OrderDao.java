@@ -116,4 +116,19 @@ public class OrderDao implements IOrderDao {
         }
         return orders;
     }
+
+    @Override
+    public int maxOrder_idNow() {
+        int max_Order_Id = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders);");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                max_Order_Id = resultSet.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return max_Order_Id;
+    }
 }
