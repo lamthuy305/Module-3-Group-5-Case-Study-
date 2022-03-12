@@ -46,7 +46,7 @@ public class OrderDetailDao implements IOrderDetailDao {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO order_detail (order_id, stone_id, quantity) VALUES (?,?,?);");
             preparedStatement.setInt(1, orderDetail.getOrder_id());
             preparedStatement.setInt(2, orderDetail.getStone_id());
-            preparedStatement.setInt(2, orderDetail.getQuantity());
+            preparedStatement.setInt(3, orderDetail.getQuantity());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

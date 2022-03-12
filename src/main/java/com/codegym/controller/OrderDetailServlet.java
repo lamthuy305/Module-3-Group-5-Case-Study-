@@ -57,6 +57,11 @@ public class OrderDetailServlet extends HttpServlet {
                 formViewDetail(request, response);
                 break;
             }
+            case "vieworder": {
+                HttpSession session = request.getSession();
+                Stone stone = (Stone) session.getAttribute("user");
+                int user_id = stone.getId();
+            }
         }
     }
 

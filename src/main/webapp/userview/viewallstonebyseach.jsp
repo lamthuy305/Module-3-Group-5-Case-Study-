@@ -90,7 +90,7 @@
                         <li><a href="#">Customer Service</a></li>
                         <li>
                             <c:if test="${user != null}">
-                                <a href="/ordersDetail?id=${user.id}">History</a>
+                                <a href="/ordersDetail?action=vieworder">History</a>
                             </c:if>
                         </li>
                     </ul>
