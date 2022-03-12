@@ -2,17 +2,14 @@ package com.codegym.service.order;
 
 import com.codegym.dao.order.IOrderDao;
 import com.codegym.model.Order;
-import com.codegym.model.OrderDetail;
-import com.codegym.model.ViewOrderDetail;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 public class OrderService implements IOrderService {
+    public static final String DD_MM_YYYY = "dd-MM-yyyy";
     private IOrderDao orderDao;
 
     public OrderService(IOrderDao orderDao) {
@@ -57,13 +54,18 @@ public class OrderService implements IOrderService {
 
     @Override
     public boolean checkCreateDateAfterDateNow(String createDate) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DD_MM_YYYY);
         Date dateCreate = java.sql.Date.valueOf(createDate);
         Date dateNow = new Date();
         if (dateNow.before(dateCreate)) {
             return true;
         }
-            return false;
+        return false;
+    }
+
+    @Override
+    public List<Order> findOderByUser(int user_id) {
+        return orderDao.findOderByUser(user_id);
     }
 
 

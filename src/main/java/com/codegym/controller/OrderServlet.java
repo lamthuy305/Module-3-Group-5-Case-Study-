@@ -59,22 +59,17 @@ public class OrderServlet extends HttpServlet {
                 break;
             }
             case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Order order = orderService.findById(id);
-                request.setAttribute("order", order);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/delete.jsp");
-                dispatcher.forward(request, response);
+                formDeleteOrder(request, response);
+                break;
             }
             case "create": {
                 formCreateOrder(request, response);
                 break;
-
             }
             case "view": {
                 formViewOrder(request, response);
                 break;
             }
-
             default: {
                 formListOrder(request, response);
                 break;
@@ -92,56 +87,12 @@ public class OrderServlet extends HttpServlet {
 
         switch (action) {
             case "createorderdetail": {
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("user");
-                List<Stone> stones = stoneService.findAll();
-                int order_id = (int) session.getAttribute("order_Id_Now");
-                int stone_id = Integer.parseInt(request.getParameter("stone_id"));
-                if (stone_id != 0) {
-                    int quantity = Integer.parseInt(request.getParameter("quantity"));
-                    OrderDetail orderDetail = new OrderDetail(order_id, stone_id, quantity);
-                    odService.create(orderDetail);
-                    String msg1 = "Success !!! Mua tiep";
-                    request.setAttribute("msg1", msg1);
-                } else {
-                    String msg2 = "Please!!! select stone";
-                    request.setAttribute("msg2", msg2);
-                }
-                request.setAttribute("user", user);
-                request.setAttribute("stones", stones);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/createorderdetail.jsp");
-                dispatcher.forward(request, response);
+                createOrderDetail(request, response);
+                break;
             }
 
             case "create": {
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("user");
-                int order_id = (int) session.getAttribute("order_Id_Now");
-                int user_id = user.getId();
-                String createDate = request.getParameter("createDate");
-                if (orderService.checkCreateDateAfterDateNow(createDate)) {
-                    Order order = new Order(order_id, user_id, createDate);
-                    orderService.create(order);
-                    List<Stone> stones = stoneService.findAll();
-                    String msg = "Create Order Success";
-                    request.setAttribute("msg", msg);
-                    request.setAttribute("user", user);
-                    request.setAttribute("order", order);
-                    request.setAttribute("stones", stones);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/order/createorderdetail.jsp");
-                    dispatcher.forward(request, response);
-                } else {
-                    String msg1 = "Create error";
-                    List<Stone> stones = stoneService.findAll();
-                    int max_Order_Id = orderService.maxOrder_idNow();
-                    int order_Id_Now = max_Order_Id + 1;
-                    request.setAttribute("order_Id_Now", order_Id_Now);
-                    request.setAttribute("msg1", msg1);
-                    request.setAttribute("user", user);
-                    request.setAttribute("stones", stones);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
-                    dispatcher.forward(request, response);
-                }
+                createOrder(request, response);
                 break;
             }
             case "delete": {
@@ -153,6 +104,59 @@ public class OrderServlet extends HttpServlet {
                 break;
             }
         }
+    }
+
+    private void createOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        int order_id = (int) session.getAttribute("order_Id_Now");
+        int user_id = user.getId();
+        String createDate = request.getParameter("createDate");
+        if (orderService.checkCreateDateAfterDateNow(createDate)) {
+            Order order = new Order(order_id, user_id, createDate);
+            orderService.create(order);
+            List<Stone> stones = stoneService.findAll();
+            String msg = "Create Order Success";
+            request.setAttribute("msg", msg);
+            request.setAttribute("user", user);
+            request.setAttribute("order", order);
+            request.setAttribute("stones", stones);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/order/createorderdetail.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            String msg1 = "Create error";
+            List<Stone> stones = stoneService.findAll();
+            int max_Order_Id = orderService.maxOrder_idNow();
+            int order_Id_Now = max_Order_Id + 1;
+            request.setAttribute("order_Id_Now", order_Id_Now);
+            request.setAttribute("msg1", msg1);
+            request.setAttribute("user", user);
+            request.setAttribute("stones", stones);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/order/create.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void createOrderDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        List<Stone> stones = stoneService.findAll();
+        int order_id = (int) session.getAttribute("order_Id_Now");
+        int stone_id = Integer.parseInt(request.getParameter("stone_id"));
+        if (stone_id != 0) {
+            int quantity = Integer.parseInt(request.getParameter("quantity"));
+            OrderDetail orderDetail = new OrderDetail(order_id, stone_id, quantity);
+            odService.create(orderDetail);
+            String msg1 = "Success !!! Mua tiep";
+            request.setAttribute("msg1", msg1);
+        } else {
+            String msg2 = "Please!!! select stone";
+            request.setAttribute("msg2", msg2);
+        }
+        request.setAttribute("user", user);
+        request.setAttribute("stones", stones);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/createorderdetail.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void updateOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -172,10 +176,6 @@ public class OrderServlet extends HttpServlet {
 
 
     private void formListOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        session.setAttribute("user", user);
-        request.setAttribute("user", user);
         List<Order> orders;
         String q = request.getParameter("q");
         if (q != null) {
@@ -224,4 +224,11 @@ public class OrderServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void formDeleteOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Order order = orderService.findById(id);
+        request.setAttribute("order", order);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/delete.jsp");
+        dispatcher.forward(request, response);
+    }
 }

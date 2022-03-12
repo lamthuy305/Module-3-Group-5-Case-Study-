@@ -148,19 +148,25 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Order_ID</th>
+                            <th scope="col">Order Detail Id</th>
+                            <th scope="col">Stone Type</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
                             <th scope="col">Create Date</th>
-                            <th scope="col">Change</th>
+                            <th scope="col">Total</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach var="order" varStatus="loop" items="${orders}">
+                        <c:forEach var="viewOrderDetail" items="${viewOrderDetails}">
                             <tr>
-                                <td>${loop.count}</td>
-                                <td>${user.username}</td>
-                                <td><a href="ordersDetail?action=vieworderdetail&id=${order.id}">${order.date}</a></td>
-                                <td>CSKH</td>
+                                <td>${viewOrderDetail.order_id}</td>
+                                <td>${viewOrderDetail.order_detail_id}</td>
+                                <td>${viewOrderDetail.stone_name}</td>
+                                <td>${viewOrderDetail.quantity}</td>
+                                <td>${viewOrderDetail.stone_price}</td>
+                                <td>${viewOrderDetail.order_create_date}</td>
+                                <td>${viewOrderDetail.quantity*viewOrderDetail.stone_price}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

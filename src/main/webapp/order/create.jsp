@@ -61,7 +61,7 @@
                 <div class="wrap-input100 validate-input" data-validate="Enter Create Date">
                     <input class="input100" type="date" name="createDate">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                    <i style="margin-left: 30px;color: #6A6A6A">(Create Date)</i>
+                    <i style="margin-left: 30px;color: #6A6A6A">(Ngay Giao Hang)</i>
                 </div>
 
 

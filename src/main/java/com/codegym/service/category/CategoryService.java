@@ -2,7 +2,6 @@ package com.codegym.service.category;
 
 import com.codegym.dao.category.ICategoryDao;
 import com.codegym.model.Category;
-import com.codegym.model.Stone;
 
 import java.util.List;
 

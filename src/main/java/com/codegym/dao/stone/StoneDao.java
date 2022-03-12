@@ -17,6 +17,7 @@ public class StoneDao implements IStoneDao {
     public static final String SQL_INSERT_STONE = "INSERT INTO stones (name,price,description,image,category_id) VALUES (?,?,?,?,?)";
     public static final String SQL_DELETE_STONE = "call delete_stone(?);";
     public static final String SQL_UPDATE_STONE = "UPDATE stones SET name=?, price=?, description=?,image=?,category_id=? WHERE id =?;";
+    public static final String SELECT_FROM_STONES_WHERE_NAME_LIKE = "SELECT * FROM stones WHERE name like ?";
     private Connection connection = DBConnection.getConnection();
 
 
@@ -138,7 +139,7 @@ public class StoneDao implements IStoneDao {
     public List<Stone> findAllByName(String q) {
         List<Stone> stones = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM stones WHERE name like ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_STONES_WHERE_NAME_LIKE);
             preparedStatement.setString(1,q);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

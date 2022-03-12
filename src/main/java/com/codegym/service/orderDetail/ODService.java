@@ -1,20 +1,17 @@
 package com.codegym.service.orderDetail;
 
 import com.codegym.dao.order_detail.IOrderDetailDao;
-import com.codegym.dao.order_detail.OrderDetailDao;
-import com.codegym.model.Order;
+
 import com.codegym.model.OrderDetail;
 import com.codegym.model.ViewOrderDetail;
-import com.codegym.service.order.IOrderService;
-
 import java.util.List;
 
 public class ODService implements IODService {
     private IOrderDetailDao orderDetailDao;
+
     public ODService(IOrderDetailDao orderDetailDao) {
         this.orderDetailDao = orderDetailDao;
     }
-
 
 
     @Override
@@ -39,7 +36,7 @@ public class ODService implements IODService {
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return orderDetailDao.deleteById(id);
     }
 
     @Override
@@ -50,6 +47,16 @@ public class ODService implements IODService {
     @Override
     public boolean create(OrderDetail orderDetail) {
         return orderDetailDao.create(orderDetail);
+    }
+
+    @Override
+    public OrderDetail findByIdOD(int id) {
+        return orderDetailDao.findByIdOD(id);
+    }
+
+    @Override
+    public boolean updateODById(int id, OrderDetail orderDetail) {
+        return orderDetailDao.updateODById(id, orderDetail);
     }
 }
 

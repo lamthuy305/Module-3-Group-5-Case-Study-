@@ -1,7 +1,6 @@
 package com.codegym.dao.role;
 
 import com.codegym.dao.DBConnection;
-import com.codegym.model.Image;
 import com.codegym.model.Role;
 
 import java.sql.Connection;
@@ -11,6 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoleDao implements IRoleDao {
+    public static final String SQL_FIND_ROLE_BY_ID = "SELECT * FROM role WHERE id=?;";
     private Connection connection = DBConnection.getConnection();
 
     public RoleDao() {
@@ -25,7 +25,7 @@ public class RoleDao implements IRoleDao {
     public Role findById(int id) {
         Role role = new Role();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM role WHERE id=?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_ROLE_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

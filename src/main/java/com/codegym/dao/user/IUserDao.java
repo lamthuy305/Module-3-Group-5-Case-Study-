@@ -1,7 +1,6 @@
 package com.codegym.dao.user;
 
 import com.codegym.dao.IGeneralDao;
-import com.codegym.model.Image_Stone;
 import com.codegym.model.User;
 
 import java.util.List;
