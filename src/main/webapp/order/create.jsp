@@ -47,35 +47,23 @@
                 <p style="text-align: center;color: red"><c:if test="${msg!=null}">${msg}</c:if></p>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="id" value="${user.id}" disabled>
+                    <input class="input100" type="text" name="order_Id_Now" value=" Order ID : ${order_Id_Now}" disabled>
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
+
 
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
                     <input class="input100" type="text" name="username" value="${user.username}" disabled>
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="passwordOld" placeholder="Password Old">
-                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                </div>
                 <p style="text-align: center;color: red"><c:if test="${msg1!=null}">${msg1}</c:if></p>
-
-
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="passwordNew" placeholder="Password New">
+                <div class="wrap-input100 validate-input" data-validate="Enter Create Date">
+                    <input class="input100" type="date" name="createDate">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                    <i style="margin-left: 30px;color: #6A6A6A">(at least 6 character,1 number and 1 alphabet)</i>
+                    <i style="margin-left: 30px;color: #6A6A6A">(Create Date)</i>
                 </div>
-                <p style="text-align: center;color: red"><c:if test="${msg4!=null}">${msg4}</c:if></p>
-                <p style="text-align: center;color: red"><c:if test="${msg2!=null}">${msg2}</c:if></p>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="enterPasswordNew" placeholder="Enter Password New">
-                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                </div>
-                <p style="text-align: center;color: red"><c:if test="${msg3!=null}">${msg3}</c:if></p>
 
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">

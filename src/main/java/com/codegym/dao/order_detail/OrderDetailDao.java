@@ -15,30 +15,43 @@ public class OrderDetailDao implements IOrderDetailDao {
             "    from order_detail  od join orders o on od.order_id = o.id\n" +
             "join stone_management.stones s on s.id = od.stone_id\n" +
             "where order_id =?;";
-    private Connection connection =DBConnection.getConnection();
-
+    private Connection connection = DBConnection.getConnection();
 
 
     public List<ViewOrderDetail> showOrderDetailById(int id) {
         List<ViewOrderDetail> viewOrderDetails = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_VIEW_ORDER_DETAIL);
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int order_id = resultSet.getInt("o.id");
                 int od_id = resultSet.getInt("od.id");
-                String name  =  resultSet.getString("name");
+                String name = resultSet.getString("name");
                 int quantity = resultSet.getInt("quantity");
-                double price  = resultSet.getDouble("price");
+                double price = resultSet.getDouble("price");
                 String createDate = resultSet.getString("createDate");
-                ViewOrderDetail viewOrderDetail = new ViewOrderDetail(order_id,od_id,name,quantity,price,createDate);
+                ViewOrderDetail viewOrderDetail = new ViewOrderDetail(order_id, od_id, name, quantity, price, createDate);
                 viewOrderDetails.add(viewOrderDetail);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return viewOrderDetails;
+    }
+
+    @Override
+    public boolean create(OrderDetail orderDetail) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO order_detail (order_id, stone_id, quantity) VALUES (?,?,?);");
+            preparedStatement.setInt(1, orderDetail.getOrder_id());
+            preparedStatement.setInt(2, orderDetail.getStone_id());
+            preparedStatement.setInt(2, orderDetail.getQuantity());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     @Override

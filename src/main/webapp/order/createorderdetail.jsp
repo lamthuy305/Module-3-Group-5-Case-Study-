@@ -35,42 +35,38 @@
     <div class="container-login100" style="background-image: url('/login-form-v16/Login_v16/images/bg-01.jpg');">
         <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
-					Order New
+					Order Detail
 				</span>
-            <form method="post" class="login100-form validate-form p-b-33 p-t-5">
-                <c:if test="${msg!=null}">
+            <form method="post" class="login100-form validate-form p-b-33 p-t-5" action="orders?action=createorderdetail">
+                <c:if test="${msg1!=null}">
                     <div class="container-login100-form-btn m-t-32">
                         <h3><a href="/home" type="submit" class="login100-form-btn">Home</a></h3>
                     </div>
                 </c:if>
-
                 <p style="text-align: center;color: red"><c:if test="${msg!=null}">${msg}</c:if></p>
+                <p style="text-align: center;color: red"><c:if test="${msg1!=null}">${msg1}</c:if></p>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
                     <input class="input100" type="text" name="username" value="${user.username}" disabled>
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="passwordOld" placeholder="Password Old">
-                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                </div>
-                <p style="text-align: center;color: red"><c:if test="${msg1!=null}">${msg1}</c:if></p>
-
-
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="passwordNew" placeholder="Password New">
-                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                    <i style="margin-left: 30px;color: #6A6A6A">(at least 6 character,1 number and 1 alphabet)</i>
-                </div>
-                <p style="text-align: center;color: red"><c:if test="${msg4!=null}">${msg4}</c:if></p>
                 <p style="text-align: center;color: red"><c:if test="${msg2!=null}">${msg2}</c:if></p>
 
-                <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="enterPasswordNew" placeholder="Enter Password New">
+                <div class="wrap-input100 validate-select" data-validate="Select Stone" style="text-align: center">
+                    <select name="stone_id" style="width: 300px;height: 30px">
+                        <option value="0" style="text-align: center">--- Select Stone ---</option>
+                        <c:forEach var="stone" items="${stones}">
+                            <option value="${stone.id}" style="text-align: center">${stone.name}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+
+                <div class="wrap-input100 validate-input" data-validate="Enter quantity">
+                    <input class="input100" type="text" name="quantity" placeholder="Quantity">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
-                <p style="text-align: center;color: red"><c:if test="${msg3!=null}">${msg3}</c:if></p>
 
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">

@@ -3,6 +3,7 @@ package com.codegym.service.orderDetail;
 import com.codegym.dao.order_detail.IOrderDetailDao;
 import com.codegym.dao.order_detail.OrderDetailDao;
 import com.codegym.model.Order;
+import com.codegym.model.OrderDetail;
 import com.codegym.model.ViewOrderDetail;
 import com.codegym.service.order.IOrderService;
 
@@ -44,6 +45,11 @@ public class ODService implements IODService {
     @Override
     public List<ViewOrderDetail> showOrderDetailById(int id) {
         return orderDetailDao.showOrderDetailById(id);
+    }
+
+    @Override
+    public boolean create(OrderDetail orderDetail) {
+        return orderDetailDao.create(orderDetail);
     }
 }
 

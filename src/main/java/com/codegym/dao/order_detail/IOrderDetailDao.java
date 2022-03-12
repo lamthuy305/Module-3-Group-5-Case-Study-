@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface IOrderDetailDao extends IGeneralDao<ViewOrderDetail> {
     List<ViewOrderDetail> showOrderDetailById(int id);
+    boolean create(OrderDetail orderDetail);
+
 }

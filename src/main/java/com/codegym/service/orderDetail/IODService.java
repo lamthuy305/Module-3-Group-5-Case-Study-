@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface IODService extends IGeneralService<ViewOrderDetail> {
     List<ViewOrderDetail> showOrderDetailById(int id);
+    boolean create(OrderDetail orderDetail);
 }

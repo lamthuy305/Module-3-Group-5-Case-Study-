@@ -81,14 +81,17 @@
                     <img src="../img/logovico.jpg" alt="" width="100" height="100">
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div>
                 <nav class="header__menu">
                     <ul>
-
                         <li class="active"><a href="/home">Home</a></li>
                         <li><a href="/orders?action=create">Shopping</a></li>
-                        <li><a href="#">WARRANTY</a>
-                        <li><a href="#">Customer Service</a>
+                        <li><a href="#">WARRANTY</a></li>
+                        <li><a href="#">Customer Service</a></li>
+                        <li>
+                            <c:if test="${user != null}">
+                                <a href="/ordersDetail?id=${user.id}">History</a>
+                            </c:if>
                         </li>
                     </ul>
                 </nav>
