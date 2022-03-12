@@ -1,9 +1,5 @@
 build
 .idea
 .gradle
-<<<<<<< HEAD
-.DBConnection
-=======
 .DBConnection
 .homelogout
->>>>>>> 98b111679dfe60396e6480c9536e3b7d70281422
