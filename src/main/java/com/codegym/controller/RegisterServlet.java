@@ -29,10 +29,6 @@ public class RegisterServlet extends HttpServlet {
 
     }
 
-    private void showFormRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/register.jsp");
-        dispatcher.forward(request, response);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +42,11 @@ public class RegisterServlet extends HttpServlet {
                 break;
             }
         }
+    }
+
+    private void showFormRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login-form-v16/register.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void checkRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

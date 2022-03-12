@@ -50,51 +50,26 @@ public class CategoryServlet extends HttpServlet {
         }
         switch (action) {
             case "edit": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Category category = categoryService.findById(id);
-                request.setAttribute("category", category);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/category/edit.jsp");
-                dispatcher.forward(request, response);
+                formUpdateCategory(request, response);
                 break;
             }
             case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Category category = categoryService.findById(id);
-                request.setAttribute("category", category);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/category/delete.jsp");
-                dispatcher.forward(request, response);
+                formdeleteCategory(request, response);
                 break;
             }
             case "create": {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/category/create.jsp");
-                dispatcher.forward(request, response);
+                formCreateCategory(request, response);
                 break;
             }
             case "view": {
-                int category_Id = Integer.parseInt(request.getParameter("id"));
-                List<Stone> stones = stoneService.findAllByCategory(category_Id);
-                request.setAttribute("stones", stones);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/category/view.jsp");
-                dispatcher.forward(request, response);
+                formViewCategory(request, response);
                 break;
             }
             default: {
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute("user");
-                session.setAttribute("user", user);
-                request.setAttribute("user", user);
-                List<Category> categories = categoryService.findAll();
-                String q = request.getParameter("q");
-                if (q != null) {
-                    categories = categoryService.findAllByName(q);
-                }
-                request.setAttribute("categories", categories);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/category/list.jsp");
-                dispatcher.forward(request, response);
+                formListCategory(request, response);
                 break;
             }
         }
-
     }
 
     @Override
@@ -106,34 +81,90 @@ public class CategoryServlet extends HttpServlet {
 
         switch (action) {
             case "create": {
-                String name = request.getParameter("name");
-                if (categoryService.checkCategory(name)) {
-                    String msg = "Category existed";
-                    request.setAttribute("msg", msg);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/category/create.jsp");
-                    dispatcher.forward(request, response);
-                    break;
-                } else {
-                    Category category = new Category(name);
-                    categoryService.create(category);
-                    response.sendRedirect("/category");
-                }
+                createCategory(request, response);
                 break;
             }
             case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                categoryService.deleteById(id);
-                response.sendRedirect("/category");
+                deleteCategory(request, response);
                 break;
             }
             case "edit": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                String name = request.getParameter("name");
-                Category category = new Category(name);
-                categoryService.updateById(id, category);
-                response.sendRedirect("/category");
+                updateCategory(request, response);
                 break;
             }
+        }
+    }
+
+    private void formListCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        request.setAttribute("user", user);
+        List<Category> categories = categoryService.findAll();
+        String q = request.getParameter("q");
+        if (q != null) {
+            categories = categoryService.findAllByName(q);
+        }
+        request.setAttribute("categories", categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/category/list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formViewCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int category_Id = Integer.parseInt(request.getParameter("id"));
+        List<Stone> stones = stoneService.findAllByCategory(category_Id);
+        request.setAttribute("stones", stones);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/category/view.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formCreateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/category/create.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formdeleteCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Category category = categoryService.findById(id);
+        request.setAttribute("category", category);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/category/delete.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formUpdateCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Category category = categoryService.findById(id);
+        request.setAttribute("category", category);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/category/edit.jsp");
+        dispatcher.forward(request, response);
+    }
+
+
+    private void updateCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        Category category = new Category(name);
+        categoryService.updateById(id, category);
+        response.sendRedirect("/category");
+    }
+
+    private void deleteCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        categoryService.deleteById(id);
+        response.sendRedirect("/category");
+    }
+
+    private void createCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        if (categoryService.checkCategory(name)) {
+            String msg = "Category existed";
+            request.setAttribute("msg", msg);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/category/create.jsp");
+            dispatcher.forward(request, response);
+            return;
+        } else {
+            Category category = new Category(name);
+            categoryService.create(category);
+            response.sendRedirect("/category");
         }
     }
 

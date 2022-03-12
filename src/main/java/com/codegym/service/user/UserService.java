@@ -70,4 +70,42 @@ public class UserService implements IUserService {
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
     }
+
+    @Override
+    public String checkPasswordOld(String password, String passwordOld) {
+        String msg = null;
+        if (!password.equals(passwordOld)) {
+            msg = "Password Old sai";
+        }
+        return msg;
+    }
+
+    @Override
+    public String checkPasswordOldAndNew(String passwordOld, String passwordNew) {
+        String msg = null;
+        if (passwordNew.equals(passwordOld)) {
+            msg = "Password New phai khac Password Old \n";
+        }
+        return msg;
+    }
+
+    @Override
+    public String checkPasswordNew(String passwordNew) {
+        String msg = null;
+        Pattern pattern = Pattern.compile(REGEX_FOR_PASSWORD);
+        if (!pattern.matcher(passwordNew).matches()) {
+            msg = "Password new sai";
+        }
+        return msg;
+    }
+
+    @Override
+    public String checkEnterPasswordNew(String passwordNew, String enterPasswordNew) {
+        String msg = null;
+        if (!passwordNew.equals(enterPasswordNew)) {
+            msg = "Password new khac nhau";
+        }
+
+        return msg;
+    }
 }

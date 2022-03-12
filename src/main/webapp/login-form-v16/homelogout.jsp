@@ -58,7 +58,13 @@
                         <c:if test="${user != null}">
                             <div class="header__top__right__auth">
                                 <p>Hello: ${user.username}!</p>
-                                <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+
+                                <div class="header__top__right__auth">
+                                    <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+                                </div>
+                                <div class="header__top__right__auth">
+                                    <a href="/users?action=changepassword">/ Change Password</a>
+                                </div>
                             </div>
                         </c:if>
                     </div>

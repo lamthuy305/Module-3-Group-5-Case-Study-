@@ -55,20 +55,24 @@ public class OrderDetailServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
-
             case "viewDetail":{
-                int id = Integer.parseInt(request.getParameter("id"));
-                List<ViewOrderDetail> viewOrderDetails = odService.showOrderDetailById(id);
-                request.setAttribute("viewOrderDetails",viewOrderDetails);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/order/viewDetail.jsp");
-                dispatcher.forward(request,response);
+                formViewDetail(request, response);
                 break;
             }
         }
-
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
+
+    private void formViewDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<ViewOrderDetail> viewOrderDetails = odService.showOrderDetailById(id);
+        request.setAttribute("viewOrderDetails",viewOrderDetails);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/viewDetail.jsp");
+        dispatcher.forward(request, response);
+    }
+
+
 }

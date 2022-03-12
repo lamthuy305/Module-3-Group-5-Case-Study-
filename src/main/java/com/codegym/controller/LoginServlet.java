@@ -4,7 +4,6 @@ import com.codegym.dao.category.CategoryDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
-import com.codegym.model.Stone;
 import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
