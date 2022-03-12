@@ -47,11 +47,6 @@
                 <p style="text-align: center;color: red"><c:if test="${msg!=null}">${msg}</c:if></p>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="id" value="${user.id}" disabled>
-                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Enter username">
                     <input class="input100" type="text" name="username" value="${user.username}" disabled>
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
