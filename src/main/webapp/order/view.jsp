@@ -1,10 +1,3 @@
-%--
-  Created by IntelliJ IDEA.
-  User: This
-  Date: 3/7/2022
-  Time: 5:26 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -34,8 +27,8 @@
             <tr>
                 <td>${order.id}</td>
                 <td>${order.user_id}</td>
-                <td><a href="/category?action=view&id=${order.id}">${order.date}</a></td>
-                <td><a href="/stones?action=edit&id=${stone.id}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
+                <td><a href="/orders?action=view&id=${order.id}">${order.date}</a></td>
+                <td><a href="/orders?action=edit&id=${order.id}" class="btn btn-primary"><i class="fas fa-edit"></i></a></td>
                 <td><a href="/orders?action=delete&id=${order.id}" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
             </tr>
         </c:forEach>

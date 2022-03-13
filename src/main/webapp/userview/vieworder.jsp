@@ -1,16 +1,13 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
-<!DOCTYPE html>
-<html lang="zxx">
-
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VicoStone | Home</title>
+    <title>VicoStone | View</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
@@ -26,6 +23,9 @@
 
 <body>
 
+
+<%--SỬA TỪ ĐÂY--%>
+
 <!-- Header Section Begin -->
 <header class="header">
     <div class="header__top">
@@ -35,6 +35,7 @@
                     <div class="header__top__left">
                         <ul>
                             <li><i class="fa fa-envelope"></i>Codegym@gmail.com</li>
+                            <%--                            <li>Free Shipping for all Order of $99</li>--%>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                             <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            <img src="img/vietnam.png" alt="" height="15" width="20">
+                            <img src="../img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
                         <c:if test="${user == null}">
@@ -52,7 +53,7 @@
                                 <a href="/login"><i class="fa fa-user"></i>Login</a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="/register"> / Register</a>
+                                <a href="/register">/Register</a>
                             </div>
                         </c:if>
 
@@ -68,7 +69,6 @@
                                 </div>
                             </div>
                         </c:if>
-
                     </div>
                 </div>
             </div>
@@ -118,7 +118,6 @@
                         <c:forEach var="category" items="${categories}">
                             <li><a href="/home?action=viewcategory&id=${category.id}">${category.name}</a></li>
                         </c:forEach>
-
                     </ul>
                 </div>
             </div>
@@ -145,82 +144,59 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/banner/sale.jpg" style="height: 700px;width: 850px">
-                    <h1 style="color: #3CC032"><b>8-3 <br/>SALE 10%<br/>All Product</b></h1>
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Create Date</th>
+                            <th scope="col">Change</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="order" varStatus="loop" items="${orders}">
+                            <tr>
+                                <td>${loop.count}</td>
+                                <td>${user.username}</td>
+                                <td><a href="ordersDetail?action=vieworderdetail&id=${order.id}">${order.date}</a></td>
+                                <td>CSKH</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <div style="height: 50px"></div>
+                    <section class="categories">
+                        <div class="container">
+                            <div class="row">
+                                <div class="categories__slider owl-carousel">
+                                    <div class="col-lg-3">
+                                        <div class="categories__item set-bg" data-setbg="${stone.image}"
+                                             style="width: 200px; height: 200px">
+                                        </div>
+                                    </div>
+
+                                    <c:forEach var="image" items="${images}">
+                                        <div class="col-lg-3">
+                                            <div class="categories__item set-bg" data-setbg="${image.link}"
+                                                 style="width: 200px; height: 200px">
+                                            </div>
+
+                                        </div>
+                                    </c:forEach>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- Hero Section End -->
-
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp8.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp9.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/product/product_bq8730_1.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/product/product_bq8786_1.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp4.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp5.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/product/product_bq8660_2.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp6.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp7.jpg">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Categories Section End -->
-
-<div style="height: 100px"></div>
-
-<!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner1.jpg" alt="" height="400" width="600">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner2.jpg" alt="" height="400" width="600">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner End -->
 
 
 <!-- Footer Section Begin -->
@@ -248,7 +224,7 @@
             <div class="col-lg-12">
                 <div class="footer__copyright">
                     <div class="footer__copyright__text">
-                        <p>Copyright &copy; 2022 All rights reserved | by Group 5 - C1121G1 -
+                        <p>Copyright &copy; 2022 All rights reserved | This template is made by Group 5 - C1121G1 -
                             CodeGym</p>
                     </div>
                     <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
@@ -273,3 +249,4 @@
 </body>
 
 </html>
+

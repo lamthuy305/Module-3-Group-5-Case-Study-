@@ -1,6 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -23,6 +21,7 @@
     <link rel="stylesheet" href="/file/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/style.css" type="text/css">
 </head>
+
 
 <body>
 
@@ -52,7 +51,7 @@
                                 <a href="/login"><i class="fa fa-user"></i>Login</a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="/register"> / Register</a>
+                                <a href="/register">/Register</a>
                             </div>
                         </c:if>
 
@@ -68,7 +67,6 @@
                                 </div>
                             </div>
                         </c:if>
-
                     </div>
                 </div>
             </div>
@@ -260,6 +258,7 @@
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
+
 <script src="/file/js/jquery-3.3.1.min.js"></script>
 <script src="/file/js/bootstrap.min.js"></script>
 <script src="/file/js/jquery.nice-select.min.js"></script>

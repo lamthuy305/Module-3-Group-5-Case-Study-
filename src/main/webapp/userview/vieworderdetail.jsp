@@ -1,42 +1,16 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="zxx">
-
+<html>
 <head>
-
-    <title>Login</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-
     <meta charset="UTF-8">
     <meta name="description" content="Ogani Template">
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vicostone</title>
+    <title>VicoStone | View</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
     <!-- Css Styles -->
-
     <link rel="stylesheet" href="/file/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/elegant-icons.css" type="text/css">
@@ -45,10 +19,12 @@
     <link rel="stylesheet" href="/file/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/file/css/style.css" type="text/css">
-
 </head>
 
 <body>
+
+
+<%--SỬA TỪ ĐÂY--%>
 
 <!-- Header Section Begin -->
 <header class="header">
@@ -59,6 +35,7 @@
                     <div class="header__top__left">
                         <ul>
                             <li><i class="fa fa-envelope"></i>Codegym@gmail.com</li>
+                            <%--                            <li>Free Shipping for all Order of $99</li>--%>
                         </ul>
                     </div>
                 </div>
@@ -68,13 +45,30 @@
                             <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
                         </div>
                         <div class="header__top__right__language">
-                            <img src="img/vietnam.png" alt="" height="15" width="20">
+                            <img src="../img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
-                        <div class="header__top__right__auth">
-                            <h3>Xin chào ${username}!</h3>
-                            <a href="/login"><i class="fa fa-user"></i>Logout</a>
-                        </div>
+                        <c:if test="${user == null}">
+                            <div class="header__top__right__auth">
+                                <a href="/login"><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="/register">/Register</a>
+                            </div>
+                        </c:if>
+
+                        <c:if test="${user != null}">
+                            <div class="header__top__right__auth">
+                                <p>Hello: ${user.username}!</p>
+
+                                <div class="header__top__right__auth">
+                                    <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+                                </div>
+                                <div class="header__top__right__auth">
+                                    <a href="/users?action=changepassword">/ Change Password</a>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -87,12 +81,17 @@
                     <img src="../img/logovico.jpg" alt="" width="100" height="100">
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div>
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
                         <li><a href="/orders?action=create">Shopping</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="#">WARRANTY</a></li>
+                        <li><a href="#">Customer Service</a></li>
+                        <li>
+                            <c:if test="${user != null}">
+                                <a href="/ordersDetail?action=vieworder">History</a>
+                            </c:if>
                         </li>
                     </ul>
                 </nav>
@@ -119,7 +118,6 @@
                         <c:forEach var="category" items="${categories}">
                             <li><a href="/home?action=viewcategory&id=${category.id}">${category.name}</a></li>
                         </c:forEach>
-
                     </ul>
                 </div>
             </div>
@@ -146,82 +144,65 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__item set-bg" data-setbg="img/banner/sale.jpg" style="height: 700px;width: 850px">
-                    <h1 style="color: #3CC032"><b>8-3 <br/>SALE 10%<br/>All Product</b></h1>
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Order_ID</th>
+                            <th scope="col">Order Detail Id</th>
+                            <th scope="col">Stone Type</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Create Date</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="viewOrderDetail" items="${viewOrderDetails}">
+                            <tr>
+                                <td>${viewOrderDetail.order_id}</td>
+                                <td>${viewOrderDetail.order_detail_id}</td>
+                                <td>${viewOrderDetail.stone_name}</td>
+                                <td>${viewOrderDetail.quantity}</td>
+                                <td>${viewOrderDetail.stone_price}</td>
+                                <td>${viewOrderDetail.order_create_date}</td>
+                                <td>${viewOrderDetail.quantity*viewOrderDetail.stone_price}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                    <div style="height: 50px"></div>
+                    <section class="categories">
+                        <div class="container">
+                            <div class="row">
+                                <div class="categories__slider owl-carousel">
+                                    <div class="col-lg-3">
+                                        <div class="categories__item set-bg" data-setbg="${stone.image}"
+                                             style="width: 200px; height: 200px">
+                                        </div>
+                                    </div>
+
+                                    <c:forEach var="image" items="${images}">
+                                        <div class="col-lg-3">
+                                            <div class="categories__item set-bg" data-setbg="${image.link}"
+                                                 style="width: 200px; height: 200px">
+                                            </div>
+
+                                        </div>
+                                    </c:forEach>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                 </div>
             </div>
         </div>
     </div>
 </section>
 <!-- Hero Section End -->
-
-<!-- Categories Section Begin -->
-<section class="categories">
-    <div class="container">
-        <div class="row">
-            <div class="categories__slider owl-carousel">
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp8.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp9.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/product/product_bq8730_1.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/product/product_bq8786_1.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp4.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp5.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/product/product_bq8660_2.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp6.jpg">
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="img/categories/sp7.jpg">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Categories Section End -->
-
-<div style="height: 100px"></div>
-
-<!-- Banner Begin -->
-<div class="banner">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner1.jpg" alt="" height="400" width="600">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
-                    <img src="img/banner/banner2.jpg" alt="" height="400" width="600">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner End -->
 
 
 <!-- Footer Section Begin -->
@@ -249,7 +230,7 @@
             <div class="col-lg-12">
                 <div class="footer__copyright">
                     <div class="footer__copyright__text">
-                        <p>Copyright &copy; 2022 All rights reserved | by Group 5 - C1121G1 -
+                        <p>Copyright &copy; 2022 All rights reserved | This template is made by Group 5 - C1121G1 -
                             CodeGym</p>
                     </div>
                     <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
@@ -261,8 +242,6 @@
 <!-- Footer Section End -->
 
 <!-- Js Plugins -->
-
-
 <script src="/file/js/jquery-3.3.1.min.js"></script>
 <script src="/file/js/bootstrap.min.js"></script>
 <script src="/file/js/jquery.nice-select.min.js"></script>

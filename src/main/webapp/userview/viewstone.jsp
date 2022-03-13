@@ -48,13 +48,27 @@
                             <img src="../img/vietnam.png" alt="" height="15" width="20">
                             <div>Viet Nam</div>
                         </div>
-                        <div class="header__top__right__auth">
-                            <a href="/login"><i class="fa fa-user"></i> Login</a>
-                        </div>
-                        <div class="header__top__right__auth">
-                            <a href="/register">/Register</a>
+                        <c:if test="${user == null}">
+                            <div class="header__top__right__auth">
+                                <a href="/login"><i class="fa fa-user"></i>Login</a>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <a href="/register">/Register</a>
+                            </div>
+                        </c:if>
 
-                        </div>
+                        <c:if test="${user != null}">
+                            <div class="header__top__right__auth">
+                                <p>Hello: ${user.username}!</p>
+
+                                <div class="header__top__right__auth">
+                                    <a href="/home?action=logout"><i class="fa fa-user"></i>Logout</a>
+                                </div>
+                                <div class="header__top__right__auth">
+                                    <a href="/users?action=changepassword">/ Change Password</a>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -67,14 +81,17 @@
                     <img src="../img/logovico.jpg" alt="" width="100" height="100">
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div>
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
-                        <li><a href="/orders?action=create">Shop</a></li>
-                        <li><a href="#">Bao hanh</a>
-                        <li><a href="#">CSKH</a>
-
+                        <li><a href="/orders?action=create">Shopping</a></li>
+                        <li><a href="#">WARRANTY</a></li>
+                        <li><a href="#">Customer Service</a></li>
+                        <li>
+                            <c:if test="${user != null}">
+                                <a href="/ordersDetail?action=vieworder">History</a>
+                            </c:if>
                         </li>
                     </ul>
                 </nav>
@@ -128,28 +145,29 @@
                     </div>
                 </div>
                 <div>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Category</th>
-                                <th scope="col">Image</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>${stone.id}</td>
-                                    <td>${stone.name}</td>
-                                    <td>${stone.price}</td>
-                                    <td>${stone.description}</td>
-                                    <td>${stone.category_id}</td>
-                                    <td><a href="/home?action=viewstone&id=${stone.id}"><img src="${stone.image}" alt="" width="100" height="100"></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Image</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>${stone.id}</td>
+                            <td>${stone.name}</td>
+                            <td>${stone.price}</td>
+                            <td>${stone.description}</td>
+                            <td>${stone.category_id}</td>
+                            <td><a href="/home?action=viewstone&id=${stone.id}"><img src="${stone.image}" alt=""
+                                                                                     width="100" height="100"></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
 
                     <div style="height: 50px"></div>
                     <section class="categories">
@@ -182,7 +200,6 @@
     </div>
 </section>
 <!-- Hero Section End -->
-
 
 
 <!-- Footer Section Begin -->

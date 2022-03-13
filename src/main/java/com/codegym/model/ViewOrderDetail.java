@@ -9,6 +9,7 @@ public class ViewOrderDetail {
     private int quantity;
     private double stone_price;
     private String order_create_date;
+    private double totalPrice;
 
     public ViewOrderDetail(int order_id, int order_detail_id, String stone_name, int quantity, double stone_price, String order_create_date) {
         this.order_id = order_id;
@@ -17,6 +18,16 @@ public class ViewOrderDetail {
         this.quantity = quantity;
         this.stone_price = stone_price;
         this.order_create_date = order_create_date;
+    }
+
+    public ViewOrderDetail(int order_id, int order_detail_id, String stone_name, int quantity, double stone_price, String order_create_date, double totalPrice) {
+        this.order_id = order_id;
+        this.order_detail_id = order_detail_id;
+        this.stone_name = stone_name;
+        this.quantity = quantity;
+        this.stone_price = stone_price;
+        this.order_create_date = order_create_date;
+        this.totalPrice = totalPrice;
     }
 
     public ViewOrderDetail() {
@@ -68,5 +79,13 @@ public class ViewOrderDetail {
 
     public void setOrder_create_date(String order_create_date) {
         this.order_create_date = order_create_date;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

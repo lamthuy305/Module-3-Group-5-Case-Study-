@@ -2,7 +2,6 @@ package com.codegym.dao.category;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.Category;
-import com.codegym.model.Stone;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,6 +12,9 @@ public class CategoryDao implements ICategoryDao {
     public static final String SQL_SELECT_ALL_CATEGORY = "SELECT * FROM category;";
     public static final String SQL_SELECT_CATEGORY_BY_ID = "SELECT * FROM category Where id = ?;";
     public static final String SQL_DELETE_CATEGORY = "call delete_category(?);";
+    public static final String INSERT_INTO_CATEGORY_NAME_VALUES = "INSERT INTO category (name) VALUES (?)";
+    public static final String UPDATE_CATEGORY_SET_NAME_WHERE_ID = "UPDATE category SET name=? WHERE id =?;";
+    public static final String SELECT_FROM_CATEGORY_WHERE_NAME_LIKE = "SELECT * FROM category WHERE name like ?";
     private Connection connection = DBConnection.getConnection();
 
 
@@ -57,7 +59,7 @@ public class CategoryDao implements ICategoryDao {
     @Override
     public boolean create(Category category) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO category (name) VALUES (?)");
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CATEGORY_NAME_VALUES);
             preparedStatement.setString(1, category.getName());
             return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -69,7 +71,7 @@ public class CategoryDao implements ICategoryDao {
     @Override
     public boolean updateById(int id, Category category) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE category SET name=? WHERE id =?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CATEGORY_SET_NAME_WHERE_ID);
             preparedStatement.setString(1, category.getName());
             preparedStatement.setInt(2, id);
             return preparedStatement.executeUpdate() > 0;
@@ -100,8 +102,8 @@ public class CategoryDao implements ICategoryDao {
     public List<Category> findAllByName(String q) {
         List<Category> categories = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category WHERE name like ?");
-            preparedStatement.setString(1,q);
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_CATEGORY_WHERE_NAME_LIKE);
+            preparedStatement.setString(1, q);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -115,4 +117,5 @@ public class CategoryDao implements ICategoryDao {
 
         return categories;
     }
+
 }
