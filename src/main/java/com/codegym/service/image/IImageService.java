@@ -2,7 +2,6 @@ package com.codegym.service.image;
 
 import com.codegym.model.Image;
 import com.codegym.model.Image_Stone;
-import com.codegym.model.Stone;
 import com.codegym.service.IGeneralService;
 
 import java.util.List;

@@ -10,6 +10,13 @@ import java.util.List;
 
 public class ImageDao implements IImageDao {
     public static final String SQL_SELECT_ALL_IMAGE = "SELECT * FROM image;";
+    public static final String SELECT_IMAGA_BY_NAME_STONE = "SELECT i.id,i.link,i.stone_id,s.name FROM image i join stones s on i.stone_id = s.id;";
+    public static final String SELECT_A_IMAGE_BY_NAME = "SELECT i.id,i.link,i.stone_id,s.name FROM image i join stones s on i.stone_id = s.id WHERE s.name like ?;";
+    public static final String SELECT_IMAGE_BY_ID = "SELECT * FROM image WHERE id=?;";
+    public static final String CREATE_IMGAE = "INSERT INTO image (link,stone_id) VALUES (?,?);";
+    public static final String UPDATE_BY_ID = "UPDATE image SET link=?,stone_id=? WHERE id=?";
+    public static final String DELETE_FROM_IMAGE_WHERE_ID = "DELETE FROM image WHERE id=?;";
+    public static final String SELECT_FROM_IMAGE_WHERE_STONE_ID = "SELECT * FROM image WHERE stone_id=?;";
     private Connection connection = DBConnection.getConnection();
 
     public ImageDao() {
@@ -37,7 +44,7 @@ public class ImageDao implements IImageDao {
     public List<Image_Stone> findAllByStoneName() {
         List<Image_Stone> image_stones = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT i.id,i.link,i.stone_id,s.name FROM image i join stones s on i.stone_id = s.id;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_IMAGA_BY_NAME_STONE);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -57,7 +64,7 @@ public class ImageDao implements IImageDao {
     public List<Image_Stone> findByStoneName(String q) {
         List<Image_Stone> image_stones = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT i.id,i.link,i.stone_id,s.name FROM image i join stones s on i.stone_id = s.id WHERE s.name like ?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_A_IMAGE_BY_NAME);
             preparedStatement.setString(1, q);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -79,7 +86,7 @@ public class ImageDao implements IImageDao {
     public Image findById(int id) {
         Image image = new Image();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM image WHERE id=?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_IMAGE_BY_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -96,7 +103,7 @@ public class ImageDao implements IImageDao {
     @Override
     public boolean create(Image image) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO image (link,stone_id) VALUES (?,?);");
+            PreparedStatement preparedStatement = connection.prepareStatement(CREATE_IMGAE);
             preparedStatement.setString(1, image.getLink());
             preparedStatement.setInt(2, image.getStone_id());
             return preparedStatement.executeUpdate() > 0;
@@ -109,7 +116,7 @@ public class ImageDao implements IImageDao {
     @Override
     public boolean updateById(int id, Image image) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE image SET link=?,stone_id=? WHERE id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
             preparedStatement.setString(1, image.getLink());
             preparedStatement.setDouble(2, image.getStone_id());
             preparedStatement.setInt(3, id);
@@ -123,7 +130,7 @@ public class ImageDao implements IImageDao {
     @Override
     public boolean deleteById(int id) {
         try {
-            CallableStatement callableStatement = connection.prepareCall("DELETE FROM image WHERE id=?;");
+            CallableStatement callableStatement = connection.prepareCall(DELETE_FROM_IMAGE_WHERE_ID);
             callableStatement.setInt(1, id);
             return callableStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -136,7 +143,7 @@ public class ImageDao implements IImageDao {
     public List<Image> findAllById(int id) {
         List<Image> images = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM image WHERE stone_id=?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_IMAGE_WHERE_STONE_ID);
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

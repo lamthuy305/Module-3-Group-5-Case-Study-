@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <head>
-    <title>Register</title>
+    <title>Login</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -35,39 +35,29 @@
     <div class="container-login100" style="background-image: url('/login-form-v16/Login_v16/images/bg-01.jpg');">
         <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
-					Order New
+					Account Login
 				</span>
-            <form method="post" class="login100-form validate-form p-b-33 p-t-5">
-                <c:if test="${msg!=null}">
-                    <div class="container-login100-form-btn m-t-32">
-                        <h3><a href="/home" type="submit" class="login100-form-btn">Home</a></h3>
-                    </div>
+            <form method="post" action="/login?action=login" class="login100-form validate-form p-b-33 p-t-5">
+                <div style="height: 20px;"></div>
+                <c:if test="${msg != null}">
+                    <h6 style="color: red; text-align: center">${msg}</h6>
                 </c:if>
-
-                <p style="text-align: center;color: red"><c:if test="${msg!=null}">${msg}</c:if></p>
-
                 <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="order_Id_Now" value=" Order ID : ${order_Id_Now}" disabled>
+                    <input class="input100" type="text" name="username" placeholder="User name">
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
-
-                <div class="wrap-input100 validate-input" data-validate="Enter username">
-                    <input class="input100" type="text" name="username" value="${user.username}" disabled>
-                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                </div>
-
-                <p style="text-align: center;color: red"><c:if test="${msg1!=null}">${msg1}</c:if></p>
-                <div class="wrap-input100 validate-input" data-validate="Enter Create Date">
-                    <input class="input100" type="date" name="createDate">
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input class="input100" type="password" name="password" placeholder="Password">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                    <i style="margin-left: 30px;color: #6A6A6A">(Ngay Giao Hang)</i>
                 </div>
-
-
+                <a href="/register"><p style="text-align: center;color: grey">Create New Account</p></a>
+                <c:if test="${message!=null}">
+                    <p class="alert alert-danger">${message}</p>
+                </c:if>
                 <div class="container-login100-form-btn m-t-32">
                     <button type="submit" class="login100-form-btn">
-                        Register
+                        Login
                     </button>
                 </div>
 

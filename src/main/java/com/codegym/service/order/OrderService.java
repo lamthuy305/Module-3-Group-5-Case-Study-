@@ -2,12 +2,14 @@ package com.codegym.service.order;
 
 import com.codegym.dao.order.IOrderDao;
 import com.codegym.model.Order;
-import com.codegym.model.OrderDetail;
-import com.codegym.model.ViewOrderDetail;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+
 public class OrderService implements IOrderService {
+    public static final String DD_MM_YYYY = "dd-MM-yyyy";
     private IOrderDao orderDao;
 
     public OrderService(IOrderDao orderDao) {
@@ -38,5 +40,33 @@ public class OrderService implements IOrderService {
     public boolean deleteById(int id) {
         return orderDao.deleteById(id);
     }
+
+    @Override
+    public List<Order> findOrderByOrderID(String q) {
+        q = "%" + q + "%";
+        return orderDao.findOrderByOrderID(q);
+    }
+
+    @Override
+    public int maxOrder_idNow() {
+        return orderDao.maxOrder_idNow();
+    }
+
+    @Override
+    public boolean checkCreateDateAfterDateNow(String createDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DD_MM_YYYY);
+        Date dateCreate = java.sql.Date.valueOf(createDate);
+        Date dateNow = new Date();
+        if (dateNow.before(dateCreate)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<Order> findOderByUser(int user_id) {
+        return orderDao.findOderByUser(user_id);
+    }
+
 
 }

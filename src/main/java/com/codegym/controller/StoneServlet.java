@@ -8,6 +8,7 @@ import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
 import com.codegym.model.Image;
 import com.codegym.model.Stone;
+import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
 import com.codegym.service.image.IImageService;
@@ -50,56 +51,26 @@ public class StoneServlet extends HttpServlet {
         }
         switch (action) {
             case "edit": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Stone stone = stoneService.findById(id);
-                int category_id = stone.getCategory_id();
-                Category category = categoryService.findById(category_id);
-                List<Category> categories = categoryService.findAll();
-                request.setAttribute("stone", stone);
-                request.setAttribute("category", category);
-                request.setAttribute("categories", categories);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/edit.jsp");
-                dispatcher.forward(request, response);
+                formUpdateStone(request, response);
                 break;
             }
             case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Stone stone = stoneService.findById(id);
-                request.setAttribute("stone", stone);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/delete.jsp");
-                dispatcher.forward(request, response);
+                formDeleteStone(request, response);
                 break;
             }
             case "create": {
-                List<Category> categories = categoryService.findAll();
-                request.setAttribute("categories", categories);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/create.jsp");
-                dispatcher.forward(request, response);
+                formCreateStone(request, response);
                 break;
             }
             case "view": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                List<Image> images = imageService.findAllByStone_ID(id);
-                Stone stone = stoneService.findById(id);
-                request.setAttribute("images", images);
-                request.setAttribute("stone", stone);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/view.jsp");
-                dispatcher.forward(request, response);
+                formViewStone(request, response);
                 break;
             }
             default: {
-                List<Stone> stones = stoneService.findAll();
-                String q = request.getParameter("q");
-                if (q != null) {
-                    stones = stoneService.findAllByName(q);
-                }
-                request.setAttribute("stones", stones);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/list.jsp");
-                dispatcher.forward(request, response);
+                formListStone(request, response);
                 break;
             }
         }
-
     }
 
     @Override
@@ -111,34 +82,109 @@ public class StoneServlet extends HttpServlet {
 
         switch (action) {
             case "create": {
-                String name = request.getParameter("name");
-                double price = Double.parseDouble(request.getParameter("price"));
-                String description = request.getParameter("description");
-                String image = request.getParameter("image");
-                int category_id = Integer.parseInt(request.getParameter("category_id"));
-                Stone stone = new Stone(name, price, description, image, category_id);
-                stoneService.create(stone);
-                response.sendRedirect("/stones");
+                createStone(request, response);
                 break;
             }
             case "delete": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                stoneService.deleteById(id);
-                response.sendRedirect("/stones");
+                deleteStone(request, response);
                 break;
             }
             case "edit": {
-                int id = Integer.parseInt(request.getParameter("id"));
-                String name = request.getParameter("name");
-                double price = Double.parseDouble(request.getParameter("price"));
-                String description = request.getParameter("description");
-                String image = request.getParameter("image");
-                int category_id = Integer.parseInt(request.getParameter("category_id"));
-                Stone stone = new Stone(name, price, description, image, category_id);
-                stoneService.updateById(id, stone);
-                response.sendRedirect("/stones");
+                updateStone(request, response);
                 break;
             }
+        }
+    }
+
+    private void formListStone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        request.setAttribute("user", user);
+        List<Stone> stones = stoneService.findAll();
+        String q = request.getParameter("q");
+        if (q != null) {
+            stones = stoneService.findAllByName(q);
+        }
+        request.setAttribute("stones", stones);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/list.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formViewStone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        List<Image> images = imageService.findAllByStone_ID(id);
+        Stone stone = stoneService.findById(id);
+        request.setAttribute("images", images);
+        request.setAttribute("stone", stone);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/view.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formCreateStone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("categories", categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/create.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formDeleteStone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Stone stone = stoneService.findById(id);
+        request.setAttribute("stone", stone);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/delete.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void formUpdateStone(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Stone stone = stoneService.findById(id);
+        int category_id = stone.getCategory_id();
+        Category category = categoryService.findById(category_id);
+        List<Category> categories = categoryService.findAll();
+        request.setAttribute("stone", stone);
+        request.setAttribute("category", category);
+        request.setAttribute("categories", categories);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/edit.jsp");
+        dispatcher.forward(request, response);
+    }
+
+
+    private void updateStone(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("price"));
+        String description = request.getParameter("description");
+        String image = request.getParameter("image");
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        Stone stone = new Stone(name, price, description, image, category_id);
+        stoneService.updateById(id, stone);
+        response.sendRedirect("/stones");
+    }
+
+    private void deleteStone(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        stoneService.deleteById(id);
+        response.sendRedirect("/stones");
+    }
+
+    private void createStone(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        int category_id = Integer.parseInt(request.getParameter("category_id"));
+        if (category_id != 0) {
+            String name = request.getParameter("name");
+            double price = Double.parseDouble(request.getParameter("price"));
+            String description = request.getParameter("description");
+            String image = request.getParameter("image");
+            Stone stone = new Stone(name, price, description, image, category_id);
+            stoneService.create(stone);
+            response.sendRedirect("/stones");
+            return;
+        } else {
+            List<Category> categories = categoryService.findAll();
+            String msg = "Please pick a Category";
+            request.setAttribute("categories", categories);
+            request.setAttribute("msg", msg);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/stone/create.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }
