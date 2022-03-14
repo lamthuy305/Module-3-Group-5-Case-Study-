@@ -99,7 +99,7 @@ public class UserViewServlet extends HttpServlet {
     private void viewSearch(HttpServletRequest request, HttpServletResponse response, List<Category> categories) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        request.setAttribute("user", user);
+        request.setAttribute("user",user);
         String q = request.getParameter("q");
         List<Stone> stones = stoneService.findAllByName(q);
         request.setAttribute("stones", stones);
