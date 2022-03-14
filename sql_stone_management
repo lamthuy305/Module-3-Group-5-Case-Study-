@@ -89,7 +89,10 @@ VALUES ('BQ 2600', 4200000, 'Kích thước 3200x1600x20', '/img/bq2600.jpg', 1)
        ('BQ 8390', 5400000, 'Kích thước 3200x1600x20', '/img/bq8390.jpg', 2),
        ('BQ 8791', 7100000, 'Kích thước 3200x1600x20', '/img/bq8791.jpg', 3),
        ('BQ 8786', 8800000, 'Kích thước 3200x1600x20', '/img/bq8786.jpg', 4),
-       ('BQ 8660', 10500000, 'Kích thước 3200x1600x20', '/img/bq8660.jpg', 5);
+       ('BQ 8660', 10500000, 'Kích thước 3200x1600x20', '/img/bq8660.jpg', 5),
+       ('BQ 400', 4200000, 'Kích thước 3200x1600x20', '/img/bq400.jpg', 1),
+       ('BQ 8730', 8800000, 'Kích thước 3200x1600x20', '/img/bq8730.jpg', 4),
+       ('BQ 9500', 10500000, 'Kích thước 3200x1600x20', '/img/bq9500.jpg', 5);
 
 insert into image(id, link, stone_id)
 VALUES (1, '/img/product/product_bq2600_1.jpg', 1),
@@ -110,7 +113,23 @@ VALUES (1, '/img/product/product_bq2600_1.jpg', 1),
        (16, '/img/product/product_bq8660_4.jpg', 5),
        (17, '/img/product/product_bq8660_5.jpg', 5),
        (18, '/img/product/product_bq8660_6.jpg', 5),
-       (19, '/img/product/product_bq8660_7.jpg', 5);
+       (19, '/img/product/product_bq8660_7.jpg', 5),
+       (20, '/img/product/product_bq400_1.jpg', 6),
+       (21, '/img/product/product_bq400_2.jpg', 6),
+       (22, '/img/product/product_bq400_3.jpg', 6),
+       (23, '/img/product/product_bq400_4.jpg', 6),
+       (24, '/img/product/product_bq400_5.jpg', 6),
+       (25, '/img/product/product_bq8730_1.jpg', 7),
+       (26, '/img/product/product_bq8730_2.jpg', 7),
+       (27, '/img/product/product_bq8730_3.jpg', 7),
+       (28, '/img/product/product_bq8730_4.jpg', 7),
+       (29, '/img/product/product_bq8730_5.jpg', 7),
+       (30, '/img/product/product_bq9500_1.jpg', 8),
+       (31, '/img/product/product_bq9500_2.jpg', 8),
+       (32, '/img/product/product_bq9500_3.jpg', 8),
+       (33, '/img/product/product_bq9500_4.jpg', 8),
+       (34, '/img/product/product_bq9500_5.jpg', 8);
+
 
 insert into users(id, username, password, birthday, address, email, role_id)
 VALUES (1, 'thuy1991', 'c1121g1', '1991-01-01', 'HaNoi', 'thuy91@gmail.com', 1),
