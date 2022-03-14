@@ -90,7 +90,7 @@ public class UserViewServlet extends HttpServlet {
     private void viewHome(HttpServletRequest request, List<Category> categories, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        request.setAttribute("user", user);
+//        request.setAttribute("user", user);
         request.setAttribute("categories", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);

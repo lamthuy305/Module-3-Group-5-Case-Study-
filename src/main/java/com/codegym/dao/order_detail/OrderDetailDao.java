@@ -122,4 +122,19 @@ public class OrderDetailDao implements IOrderDetailDao {
         }
         return false;
     }
+    public int countOrderDatail()
+    {
+        try {
+            PreparedStatement preparedStatement= connection.prepareStatement("select count(id) from order_detail;");
+            ResultSet resultSet=preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+               int countOrderDatail=resultSet.getInt("count(id)");
+                return countOrderDatail;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

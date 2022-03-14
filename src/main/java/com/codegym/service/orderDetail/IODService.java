@@ -14,6 +14,7 @@ public interface IODService extends IGeneralService<ViewOrderDetail> {
     OrderDetail findByIdOD(int id);
 
     boolean updateODById(int id, OrderDetail orderDetail);
+    int countOrderDatail();
 
 
 }

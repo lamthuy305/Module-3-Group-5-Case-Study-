@@ -1,12 +1,16 @@
 package com.codegym.controller;
 
 import com.codegym.dao.category.CategoryDao;
+import com.codegym.dao.order_detail.IOrderDetailDao;
+import com.codegym.dao.order_detail.OrderDetailDao;
 import com.codegym.dao.stone.StoneDao;
 import com.codegym.dao.user.UserDao;
 import com.codegym.model.Category;
 import com.codegym.model.User;
 import com.codegym.service.category.CategoryService;
 import com.codegym.service.category.ICategoryService;
+import com.codegym.service.orderDetail.IODService;
+import com.codegym.service.orderDetail.ODService;
 import com.codegym.service.stone.IStoneService;
 import com.codegym.service.stone.StoneService;
 import com.codegym.service.user.IUserService;
@@ -23,6 +27,7 @@ public class LoginServlet extends HttpServlet {
     private IUserService userService = new UserService(new UserDao());
     private ICategoryService categoryService = new CategoryService(new CategoryDao());
     private IStoneService stoneService = new StoneService(new StoneDao());
+    private IODService odService =new ODService(new OrderDetailDao());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,13 +73,15 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             request.setAttribute("user", user);
             request.setAttribute("username", username);
+            int countOrderDetail =odService.countOrderDatail();
+            request.setAttribute("countOrderDetail",countOrderDetail);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login-form-v16/admin.jsp");
             dispatcher.forward(request, response);
         } else if (role_id == 2) {
             User user = userService.findByUsername(username);
             session.setAttribute("user", user);
-            request.setAttribute("user", user);
-            request.setAttribute("username", username);
+//            request.setAttribute("user", user);
+//            request.setAttribute("username", username);
             request.setAttribute("categories", categories);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login-form-v16/homelogout.jsp");
             dispatcher.forward(request, response);

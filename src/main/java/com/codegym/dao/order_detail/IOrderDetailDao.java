@@ -15,5 +15,6 @@ public interface IOrderDetailDao extends IGeneralDao<ViewOrderDetail> {
 
     boolean updateODById(int id, OrderDetail orderDetail);
 
+    int countOrderDatail();
 
 }

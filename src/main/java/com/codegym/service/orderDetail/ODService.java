@@ -58,5 +58,10 @@ public class ODService implements IODService {
     public boolean updateODById(int id, OrderDetail orderDetail) {
         return orderDetailDao.updateODById(id, orderDetail);
     }
+
+    @Override
+    public int countOrderDatail() {
+        return orderDetailDao.countOrderDatail();
+    }
 }
 
