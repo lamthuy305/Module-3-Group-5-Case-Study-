@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 
 public class UserService implements IUserService {
     public static final String REGEX_FOR_PASSWORD = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
-    public static final String PASSWORD_ERORR = "Password Old sai";
-    public static final String PASSWORD_NEW_PHAI_KHAC_PASSWORD_OLD = "Password New phai khac Password Old \n";
-    public static final String PASSWORD_NEW_ERORR = "Password new sai";
-    public static final String PASSWORD_NEW_KHAC_NHAU = "Password new khac nhau";
+    public static final String PASSWORD_ERORR = "wrong old password\n";
+    public static final String PASSWORD_NEW_PHAI_KHAC_PASSWORD_OLD = "The new password must be different from the old password \n";
+    public static final String PASSWORD_NEW_ERORR = "Invalid new password\n";
+    public static final String PASSWORD_NEW_KHAC_NHAU = "new password does not match\n";
     IUserDao userDao;
 
     public UserService(IUserDao userDao) {

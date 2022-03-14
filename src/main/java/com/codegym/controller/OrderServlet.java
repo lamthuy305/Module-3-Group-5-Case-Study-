@@ -173,7 +173,7 @@ public class OrderServlet extends HttpServlet {
             int quantity = Integer.parseInt(request.getParameter("quantity"));
             OrderDetail orderDetail = new OrderDetail(order_id, stone_id, quantity);
             odService.create(orderDetail);
-            String msg1 = "Success !!! Mua tiep";
+            String msg1 = "Success !!! \n Buy more, please enter orders";
             request.setAttribute("msg1", msg1);
         } else {
             String msg2 = "Please!!! select stone";
