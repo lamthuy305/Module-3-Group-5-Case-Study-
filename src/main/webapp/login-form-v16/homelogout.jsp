@@ -84,7 +84,7 @@
                     <ul>
                         <li class="active"><a href="/home">Home</a></li>
                         <li><a href="/orders?action=create">Shopping</a></li>
-                        <li><a href="#">WARRANTY</a></li>
+                        <li><a href="/file/CSBH.pdf">WARRANTY</a></li>
                         <li><a href="#">Customer Service</a></li>
                         <li>
                             <c:if test="${user != null}">
