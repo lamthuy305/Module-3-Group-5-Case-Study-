@@ -88,18 +88,12 @@ public class UserViewServlet extends HttpServlet {
     }
 
     private void viewHome(HttpServletRequest request, List<Category> categories, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("user", user);
         request.setAttribute("categories", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
 
     private void viewSearch(HttpServletRequest request, HttpServletResponse response, List<Category> categories) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("user", user);
         String q = request.getParameter("q");
         List<Stone> stones = stoneService.findAllByName(q);
         request.setAttribute("stones", stones);
@@ -109,9 +103,6 @@ public class UserViewServlet extends HttpServlet {
     }
 
     private void viewStone(HttpServletRequest request, HttpServletResponse response, List<Category> categories) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("user", user);
         int id = Integer.parseInt(request.getParameter("id"));
         Stone stone = stoneService.findById(id);
         List<Image> images = imageService.findAllByStone_ID(id);
@@ -123,9 +114,6 @@ public class UserViewServlet extends HttpServlet {
     }
 
     private void viewCategory(HttpServletRequest request, HttpServletResponse response, List<Category> categories) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        request.setAttribute("user", user);
         int id = Integer.parseInt(request.getParameter("id"));
         List<Stone> stones = stoneService.findAllByCategory(id);
         request.setAttribute("stones", stones);
@@ -138,7 +126,6 @@ public class UserViewServlet extends HttpServlet {
         User user = null;
         HttpSession session = request.getSession();
         session.setAttribute("user", user);
-        request.setAttribute("user", user);
         request.setAttribute("categories", categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);

@@ -24,6 +24,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -70,11 +71,28 @@ public class OrderServlet extends HttpServlet {
                 formViewOrder(request, response);
                 break;
             }
+            case "reset": {
+                formReset(request, response);
+                break;
+            }
             default: {
                 formListOrder(request, response);
                 break;
             }
         }
+    }
+
+    private void formReset(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String stringCount = (String) session.getAttribute("count");
+        int count = Integer.parseInt(stringCount);
+        stringCount = null;
+        session.setAttribute("count", stringCount);
+        List<Order> orders;
+        orders = orderService.findAllDESC(count);
+        request.setAttribute("orders", orders);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/order/list.jsp");
+        dispatcher.forward(request, response);
     }
 
 
@@ -115,6 +133,14 @@ public class OrderServlet extends HttpServlet {
         if (orderService.checkCreateDateAfterDateNow(createDate)) {
             Order order = new Order(order_id, user_id, createDate);
             orderService.create(order);
+            int count = 0;
+            String stringCount = (String) session.getAttribute("count");
+            if (stringCount != null) {
+                count = Integer.parseInt(stringCount);
+            }
+            count = count + 1;
+            stringCount = String.valueOf(count);
+            session.setAttribute("count", stringCount);
             List<Stone> stones = stoneService.findAll();
             String msg = "Create Order Success";
             request.setAttribute("msg", msg);

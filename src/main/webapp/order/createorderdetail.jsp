@@ -64,7 +64,7 @@
 
 
                 <div class="wrap-input100 validate-input" data-validate="Enter quantity">
-                    <input class="input100" type="text" name="quantity" placeholder="Quantity">
+                    <input class="input100" type="number" name="quantity" placeholder="Quantity">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
 
