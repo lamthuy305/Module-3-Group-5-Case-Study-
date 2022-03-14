@@ -17,6 +17,7 @@ public class OrderDao implements IOrderDao {
     public static final String SELECT_FROM_ORDERS_WHERE_ID_LIKE = "SELECT * from orders where id like ?;";
     public static final String SELECT_FROM_ORDERS_WHERE_ID_SELECT_MAX_ID_FROM_ORDERS = "SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders);";
     public static final String SELECT_FROM_ORDERS_WHERE_USER_ID = "SELECT * from orders where user_id = ?;";
+    public static final String SELECT_FROM_ORDERS_ORDER_BY_ID_DESC = "SELECT * FROM orders ORDER BY id DESC limit ?;";
     private Connection connection = DBConnection.getConnection();
 
 
@@ -153,5 +154,23 @@ public class OrderDao implements IOrderDao {
         return orders;
     }
 
-
+    @Override
+    public List<Order> findAllDESC(int count) {
+        List<Order> orders = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_ORDERS_ORDER_BY_ID_DESC);
+            preparedStatement.setInt(1, count);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String date = resultSet.getString("createDate");
+                Order order = new Order(id, user_id, date);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
 }
