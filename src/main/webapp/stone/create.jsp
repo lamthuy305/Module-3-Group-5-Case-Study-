@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="text" name="price" placeholder="Price">
+                    <input class="input100" type="number" name="price" placeholder="Price">
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
 

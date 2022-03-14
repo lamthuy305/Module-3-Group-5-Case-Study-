@@ -11,7 +11,9 @@ public interface IOrderService extends IGeneralService<Order> {
     int maxOrder_idNow();
 
     boolean checkCreateDateAfterDateNow(String createDate);
+
     List<Order> findOderByUser(int user_id);
 
+    List<Order> findAllDESC(int count);
 
 }

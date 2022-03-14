@@ -68,5 +68,10 @@ public class OrderService implements IOrderService {
         return orderDao.findOderByUser(user_id);
     }
 
+    @Override
+    public List<Order> findAllDESC(int count) {
+        return orderDao.findAllDESC(count);
+    }
+
 
 }
