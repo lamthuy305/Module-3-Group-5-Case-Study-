@@ -12,6 +12,9 @@
 <body>
 <div class="container">
     <h1 style="text-align: center " >Order Detail</h1>
+    <div class="col-1" style="text-align: right ; margin-bottom: 20px">
+        <a class="btn btn-primary float-end" href="/orders">Quay lại</a>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -22,6 +25,9 @@
             <th scope="col">Price</th>
             <th scope="col">Create Date</th>
             <th scope="col">Total</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+
         </tr>
         </thead>
         <tbody>
@@ -34,6 +40,10 @@
                 <td>${viewOrderDetail.stone_price}</td>
                 <td>${viewOrderDetail.order_create_date}</td>
                 <td>${viewOrderDetail.quantity*viewOrderDetail.stone_price}</td>
+                <td><a href="/ordersDetail?action=edit&id=${viewOrderDetail.order_detail_id}" class="btn btn-primary"><i
+                        class="fas fa-edit"></i></a></td>
+                <td><a href="/ordersDetail?action=delete&id=${viewOrderDetail.order_detail_id}" class="btn btn-danger"><i
+                        class="fas fa-trash"></i></a></td>
             </tr>
         </c:forEach>
         </tbody>

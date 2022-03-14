@@ -148,24 +148,21 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">#</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Image</th>
+                            <th scope="col">Create Date</th>
+                            <th scope="col">Change</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>${stone.id}</td>
-                            <td>${stone.name}</td>
-                            <td>${stone.price}</td>
-                            <td>${stone.description}</td>
-                            <td>${stone.category_id}</td>
-                            <td><a href="/home?action=viewstone&id=${stone.id}"><img src="${stone.image}" alt=""
-                                                                                     width="100" height="100"></a></td>
-                        </tr>
+                        <c:forEach var="order" varStatus="loop" items="${orders}">
+                            <tr>
+                                <td>${loop.count}</td>
+                                <td>${user.username}</td>
+                                <td><a href="ordersDetail?action=vieworderdetail&id=${order.id}">${order.date}</a></td>
+                                <td>CSKH</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
 

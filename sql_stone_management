@@ -1,0 +1,212 @@
+create database stone_management;
+use stone_management;
+
+create table stones
+(
+    id          int primary key auto_increment,
+    name        varchar(50),
+    price       double,
+    description varchar(100),
+    image       varchar(120),
+    category_id int
+);
+
+create table image
+(
+    id       int primary key auto_increment,
+    link     varchar(120),
+    stone_id int
+);
+
+create table category
+(
+    id   int primary key auto_increment,
+    name varchar(50)
+);
+
+create table users
+(
+    id       int primary key auto_increment,
+    username varchar(50) not null unique,
+    password varchar(50),
+    birthday date,
+    address  varchar(50),
+    email    varchar(50),
+    role_id  int
+);
+
+create table role
+(
+    id       int primary key auto_increment,
+    roleName varchar(50)
+);
+
+create table orders
+(
+    id         int primary key auto_increment,
+    user_id    int,
+    createdate varchar(50)
+);
+
+create table order_detail
+(
+    id       int primary key auto_increment,
+    order_id int,
+    stone_id int,
+    quantity int
+);
+
+
+alter table stones
+    add foreign key (category_id) references category (id);
+alter table image
+    add foreign key (stone_id) references stones (id);
+
+alter table orders
+    add foreign key (user_id) references users (id);
+
+alter table order_detail
+    add foreign key (stone_id) references stones (id);
+alter table order_detail
+    add foreign key (order_id) references orders (id);
+
+alter table users
+    add foreign key (role_id) references role (id);
+
+insert into category(id, name)
+VALUES (1, 'Group A'),
+       (2, 'Group B'),
+       (3, 'Group C'),
+       (4, 'Group D'),
+       (5, 'Group E');
+
+insert into role(id, roleName)
+VALUES (1, 'role_admin'),
+       (2, 'role_user');
+
+insert into stones(name, price, description, image, category_id)
+VALUES ('BQ 2600', 4200000, 'Kích thước 3200x1600x20', '/img/bq2600.jpg', 1),
+       ('BQ 8390', 5400000, 'Kích thước 3200x1600x20', '/img/bq8390.jpg', 2),
+       ('BQ 8791', 7100000, 'Kích thước 3200x1600x20', '/img/bq8791.jpg', 3),
+       ('BQ 8786', 8800000, 'Kích thước 3200x1600x20', '/img/bq8786.jpg', 4),
+       ('BQ 8660', 10500000, 'Kích thước 3200x1600x20', '/img/bq8660.jpg', 5);
+
+insert into image(id, link, stone_id)
+VALUES (1, '/img/product/product_bq2600_1.jpg', 1),
+       (2, '/img/product/product_bq2600_2.jpg', 1),
+       (3, '/img/product/product_bq2600_3.jpg', 1),
+       (4, '/img/product/product_bq2600_4.jpg', 1),
+       (5, '/img/product/product_bq8390_1.jpg', 2),
+       (6, '/img/product/product_bq8390_2.jpg', 2),
+       (7, '/img/product/product_bq8791_1.jpg', 3),
+       (8, '/img/product/product_bq8791_2.jpg', 3),
+       (9, '/img/product/product_bq8786_1.jpg', 4),
+       (10, '/img/product/product_bq8786_2.jpg', 4),
+       (11, '/img/product/product_bq8786_3.jpg', 4),
+       (12, '/img/product/product_bq8786_4.jpg', 4),
+       (13, '/img/product/product_bq8660_1.jpg', 5),
+       (14, '/img/product/product_bq8660_2.jpg', 5),
+       (15, '/img/product/product_bq8660_3.jpg', 5),
+       (16, '/img/product/product_bq8660_4.jpg', 5),
+       (17, '/img/product/product_bq8660_5.jpg', 5),
+       (18, '/img/product/product_bq8660_6.jpg', 5),
+       (19, '/img/product/product_bq8660_7.jpg', 5);
+
+insert into users(id, username, password, birthday, address, email, role_id)
+VALUES (1, 'thuy1991', 'c1121g1', '1991-01-01', 'HaNoi', 'thuy91@gmail.com', 1),
+       (2, 'bach1997', 'c1121g1', '1997-01-01', 'HaNoi', 'bach97@gmail.com', 2),
+       (3, 'tinh1997', 'c1121g1', '1997-01-01', 'HaNoi', 'tinh97@gmail.com', 2),
+       (4, 'cuong2003', 'c1121g1', '2003-01-01', 'Dak Lak', 'cuong2k3@gmail.com', 2);
+
+insert into orders(id, user_id, createdate)
+VALUES (1, 2, '2022-03-04'),
+       (2, 3, '2022-03-06'),
+       (3, 2, '2022-03-14'),
+       (4, 4, '2022-03-14'),
+       (5, 3, '2022-03-14'),
+       (6, 3, '2022-03-14');
+
+insert into order_detail(id, order_id, stone_id, quantity)
+VALUES (1, 2, 1, 15),
+       (2, 4, 3, 20),
+       (3, 3, 2, 6),
+       (4, 1, 5, 30),
+       (5, 2, 4, 5),
+       (6, 4, 1, 35),
+       (7, 5, 2, 7),
+       (8, 6, 5, 40);
+
+DELIMITER //
+create procedure delete_category(
+    in id_input int
+)
+begin
+    update stones
+    set category_id = null
+    where category_id = id_input;
+    delete
+    from category
+    where id = id_input;
+end //
+DELIMITER ;
+
+
+DELIMITER //
+create procedure delete_stone(
+    in id_input int
+)
+begin
+    update image set stone_id = null where stone_id = id_input;
+    delete from stones where id = id_input;
+end //
+DELIMITER ;
+
+DELIMITER //
+create procedure getOrderPrice(
+    IN input_order_id int
+)
+begin
+    select s.price,
+           od.quantity,
+           od.order_id,
+           (od.quantity * s.price)
+    from order_detail od
+             join stones s on od.stone_id = s.id
+    WHERE order_id = input_order_id;
+end //
+delimiter ;
+
+
+delimiter //
+create procedure deleteOrder(
+    In id_input int
+)
+begin
+    update order_detail set order_id = null where order_id = id_input;
+    delete from orders where id = id_input;
+end //
+delimiter ;
+
+
+DELIMITER //
+create procedure showViewOrderDetail()
+begin
+    select o.id, od.id, s.name, od.quantity, s.price, o.createDate, (od.quantity * s.price) as 'price'
+    from order_detail od
+             join orders o on od.order_id = o.id
+             join stone_management.stones s on s.id = od.stone_id
+    where order_id = 1;
+end //
+delimiter ;
+
+
+DELIMITER //
+create procedure deleteUser(
+    IN input_id_user int
+)
+begin
+    update orders set user_id = null where user_id = input_id_user;
+    delete from users where id = input_id_user;
+end //
+delimiter ;
+

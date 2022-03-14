@@ -1,7 +1,6 @@
 package com.codegym.service.category;
 
 import com.codegym.model.Category;
-import com.codegym.model.Stone;
 import com.codegym.service.IGeneralService;
 
 import java.util.List;

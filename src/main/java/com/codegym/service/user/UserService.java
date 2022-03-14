@@ -8,6 +8,10 @@ import java.util.regex.Pattern;
 
 public class UserService implements IUserService {
     public static final String REGEX_FOR_PASSWORD = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+    public static final String PASSWORD_ERORR = "Password Old sai";
+    public static final String PASSWORD_NEW_PHAI_KHAC_PASSWORD_OLD = "Password New phai khac Password Old \n";
+    public static final String PASSWORD_NEW_ERORR = "Password new sai";
+    public static final String PASSWORD_NEW_KHAC_NHAU = "Password new khac nhau";
     IUserDao userDao;
 
     public UserService(IUserDao userDao) {
@@ -75,7 +79,7 @@ public class UserService implements IUserService {
     public String checkPasswordOld(String password, String passwordOld) {
         String msg = null;
         if (!password.equals(passwordOld)) {
-            msg = "Password Old sai";
+            msg = PASSWORD_ERORR;
         }
         return msg;
     }
@@ -84,7 +88,7 @@ public class UserService implements IUserService {
     public String checkPasswordOldAndNew(String passwordOld, String passwordNew) {
         String msg = null;
         if (passwordNew.equals(passwordOld)) {
-            msg = "Password New phai khac Password Old \n";
+            msg = PASSWORD_NEW_PHAI_KHAC_PASSWORD_OLD;
         }
         return msg;
     }
@@ -94,7 +98,7 @@ public class UserService implements IUserService {
         String msg = null;
         Pattern pattern = Pattern.compile(REGEX_FOR_PASSWORD);
         if (!pattern.matcher(passwordNew).matches()) {
-            msg = "Password new sai";
+            msg = PASSWORD_NEW_ERORR;
         }
         return msg;
     }
@@ -103,7 +107,7 @@ public class UserService implements IUserService {
     public String checkEnterPasswordNew(String passwordNew, String enterPasswordNew) {
         String msg = null;
         if (!passwordNew.equals(enterPasswordNew)) {
-            msg = "Password new khac nhau";
+            msg = PASSWORD_NEW_KHAC_NHAU;
         }
 
         return msg;

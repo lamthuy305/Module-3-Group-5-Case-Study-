@@ -1,7 +1,6 @@
 package com.codegym.service.role;
 
 import com.codegym.dao.role.IRoleDao;
-import com.codegym.dao.stone.IStoneDao;
 import com.codegym.model.Role;
 
 import java.util.List;

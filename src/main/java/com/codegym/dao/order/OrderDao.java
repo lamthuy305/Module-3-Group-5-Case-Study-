@@ -2,7 +2,6 @@ package com.codegym.dao.order;
 
 import com.codegym.dao.DBConnection;
 import com.codegym.model.*;
-import com.sun.org.apache.xpath.internal.operations.Or;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,6 +14,10 @@ public class OrderDao implements IOrderDao {
     public static final String SELECT_ONE_ORDER = "SELECT * FROM orders WHERE id = ?;";
     public static final String SELECT_ALL_ORDERS = "SELECT * FROM orders; ";
     public static final String DELETE_ORDER = "call deleteOrder(?) ";
+    public static final String SELECT_FROM_ORDERS_WHERE_ID_LIKE = "SELECT * from orders where id like ?;";
+    public static final String SELECT_FROM_ORDERS_WHERE_ID_SELECT_MAX_ID_FROM_ORDERS = "SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders);";
+    public static final String SELECT_FROM_ORDERS_WHERE_USER_ID = "SELECT * from orders where user_id = ?;";
+    public static final String SELECT_FROM_ORDERS_ORDER_BY_ID_DESC = "SELECT * FROM orders ORDER BY id DESC limit ?;";
     private Connection connection = DBConnection.getConnection();
 
 
@@ -101,7 +104,7 @@ public class OrderDao implements IOrderDao {
     public List<Order> findOrderByOrderID(String q) {
         List<Order> orders = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from orders where id like ?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_ORDERS_WHERE_ID_LIKE);
             preparedStatement.setString(1, q);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -121,7 +124,7 @@ public class OrderDao implements IOrderDao {
     public int maxOrder_idNow() {
         int max_Order_Id = 0;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM orders WHERE id = (SELECT MAX(id) FROM orders);");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_ORDERS_WHERE_ID_SELECT_MAX_ID_FROM_ORDERS);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 max_Order_Id = resultSet.getInt("id");
@@ -130,5 +133,44 @@ public class OrderDao implements IOrderDao {
             e.printStackTrace();
         }
         return max_Order_Id;
+    }
+
+    @Override
+    public List<Order> findOderByUser(int user_id) {
+        List<Order> orders = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_ORDERS_WHERE_USER_ID);
+            preparedStatement.setInt(1, user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String createDate = resultSet.getString("createDate");
+                Order order = new Order(id, user_id, createDate);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    @Override
+    public List<Order> findAllDESC(int count) {
+        List<Order> orders = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_ORDERS_ORDER_BY_ID_DESC);
+            preparedStatement.setInt(1, count);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int user_id = resultSet.getInt("user_id");
+                String date = resultSet.getString("createDate");
+                Order order = new Order(id, user_id, date);
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
     }
 }

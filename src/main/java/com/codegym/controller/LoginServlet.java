@@ -66,14 +66,12 @@ public class LoginServlet extends HttpServlet {
         if (role_id == 1) {
             User user = userService.findByUsername(username);
             session.setAttribute("user", user);
-            request.setAttribute("user", user);
             request.setAttribute("username", username);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login-form-v16/admin.jsp");
             dispatcher.forward(request, response);
         } else if (role_id == 2) {
             User user = userService.findByUsername(username);
             session.setAttribute("user", user);
-            request.setAttribute("user", user);
             request.setAttribute("username", username);
             request.setAttribute("categories", categories);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login-form-v16/homelogout.jsp");

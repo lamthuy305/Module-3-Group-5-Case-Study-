@@ -2,8 +2,6 @@
 package com.codegym.dao.user;
 
 import com.codegym.dao.DBConnection;
-import com.codegym.model.Image;
-import com.codegym.model.Image_Stone;
 import com.codegym.model.User;
 
 import java.sql.*;
@@ -15,9 +13,12 @@ public class UserDao implements IUserDao {
     public static final String SELECT_ONE_FROM_USER = "SELECT * FROM users where id = ?";
     public static final String INSERT_USER = "insert into users (username,password,birthday,address,email,role_id) values (?,?,?,?,?,?)";
     public static final String UPDATE_USER = "UPDATE users SET username = ?, password = ?, birthday = ?, address = ?, email=?,role_id =? where  id = ?";
-    public static final String DELETE_USER = "delete from users where id = ?";
     public static final String SELECT_ALL_GUEST_FROM_USERS = "select * from users where role_id = 2";
     public static final String FIND_USERNAME = "select username from users where username = ?";
+    public static final String CALL_DELETE_USER = "call deleteUser(?);";
+    public static final String SELECT_FROM_USERS_WHERE_USERNAME_LIKE = "SELECT * from users where username like ?;";
+    public static final String SELECT_FROM_USERS_WHERE_USERNAME = "SELECT * FROM users WHERE username = ?";
+    public static final String SELECT_ROLE_ID_FROM_USERS_WHERE_USERNAME_AND_PASSWORD = "select role_id from users where username= ? and password= ?";
     Connection connection = DBConnection.getConnection();
 
     @Override
@@ -104,9 +105,9 @@ public class UserDao implements IUserDao {
     @Override
     public boolean deleteById(int id) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_USER);
-            preparedStatement.setInt(1, id);
-            return preparedStatement.executeUpdate() > 0;
+            CallableStatement callableStatement = connection.prepareCall(CALL_DELETE_USER);
+            callableStatement.setInt(1, id);
+            return callableStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,7 +138,7 @@ public class UserDao implements IUserDao {
     public List<User> findUserByUserName(String q) {
         List<User> users = new ArrayList<>();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from users where username like ?;");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_USERS_WHERE_USERNAME_LIKE);
             preparedStatement.setString(1, q);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -161,7 +162,7 @@ public class UserDao implements IUserDao {
     public User findByUsername(String username) {
         User user = new User();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_FROM_USERS_WHERE_USERNAME);
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -182,7 +183,7 @@ public class UserDao implements IUserDao {
     public int findRoleId(String username, String password) {
         int role_id = -1;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("select role_id from users where username= ? and password= ?");
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ROLE_ID_FROM_USERS_WHERE_USERNAME_AND_PASSWORD);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
